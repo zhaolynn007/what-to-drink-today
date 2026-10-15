@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>今天喝什么 · 12 个问题帮你挑一杯不会买错的</title>
+<meta name="description" content="12 个生活化的小问题，帮你判断今天该喝哪一类酒。只给到「产区 + 风格」，不讲术语、不推牌子、不出现酒庄。不懂酒也没关系，来测测你就知道。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="今天喝什么">
+<meta property="og:title" content="今天喝什么 · 12 个问题帮你挑一杯不会买错的">
+<meta property="og:description" content="12 个生活化的小问题，帮你判断今天该喝哪一类酒。不讲术语、不推牌子，不懂酒也没关系。">
+<meta property="og:url" content="https://zhaolynn007.github.io/what-to-drink-today/">
+<meta property="og:image" content="https://zhaolynn007.github.io/what-to-drink-today/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhaolynn007.github.io/what-to-drink-today/cover.png">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%237B2430'/%3E%3Ctext%20x='16'%20y='23'%20font-size='17'%20text-anchor='middle'%20fill='%23E9C9A8'%20font-family='serif'%3E酒%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F7F4EE; --card:#FFFDFA; --ink:#241C18; --ink2:#6E635B; --ink3:#9C9188;
+  --line:#E6DED3; --wine:#7B2430; --wine-d:#4A121D; --gold:#A8834E;
+  --paper:#FDFAF3; --paperline:#EADDC6;
+}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px; line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+  display:flex; justify-content:center;
+  padding:0 20px 72px;
+}
+.serif{font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",Georgia,"SimSun",serif}
+.wrap{width:100%;max-width:720px;padding-top:48px}
+
+.bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:36px}
+.bar i{display:block;height:100%;width:0;border-radius:3px;
+  background:linear-gradient(90deg,var(--wine),var(--gold));
+  transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+.fade{opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s cubic-bezier(.2,.8,.3,1)}
+.fade.in{opacity:1;transform:none}
+
+/* ---------- 结果浮层：浮在"三个推荐"上面 ---------- */
+.ovl{position:fixed;inset:0;z-index:80;display:none}
+.ovl.on{display:block}
+.ovl-bg{position:absolute;inset:0;background:rgba(32,16,20,.52);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.ovl-panel{
+  position:absolute;left:50%;top:50%;width:min(94vw,660px);max-height:90vh;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  transform:translate(-50%,-50%);
+  background:var(--bg);border-radius:22px;padding:26px 22px 30px;
+  box-shadow:0 34px 90px rgba(20,8,12,.5);
+  animation:rise .44s cubic-bezier(.2,1.06,.3,1) both;
+}
+/* "上浮"：从下方一点浮上来，带轻微过冲 */
+@keyframes rise{
+  from{opacity:0;transform:translate(-50%,-44%) scale(.955)}
+  to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+.ovl-hint{margin-top:22px;text-align:center;font-size:12.5px;color:var(--ink3);line-height:1.75}
+.ovl-hint b{color:var(--wine);font-weight:600}
+.toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%);z-index:120;
+  max-width:86vw;background:rgba(36,20,24,.93);color:#fff;font-size:13px;line-height:1.5;
+  padding:11px 20px;border-radius:999px;box-shadow:0 12px 30px rgba(0,0,0,.32);
+  transition:opacity .4s ease;opacity:1}
+.toast.out{opacity:0}
+@media (prefers-reduced-motion:reduce){ .ovl-panel{animation:none} }
+/* 多选题：圆点换成方框 + 勾 */
+.opts.multi .dot{border-radius:6px}
+.opts.multi .opt.sel .dot{border-radius:6px;border-color:var(--wine);background:var(--wine)}
+.opts.multi .opt.sel .dot::after{
+  content:"";width:10px;height:5px;border-radius:0;background:none;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(-45deg) translate(1px,-2px);
+}
+.qhint.multi{color:var(--wine);margin-bottom:16px}
+.multibar{margin-top:22px}
+.multibar button.go{width:100%}
+
+/* ---------- 首页 ---------- */
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--gold);margin-bottom:16px}
+h1{font-size:38px;line-height:1.28;font-weight:600;margin-bottom:18px}
+h1 em{font-style:normal;color:var(--wine)}
+.lede{color:var(--ink2);font-size:16.5px;margin-bottom:32px}
+.lede b{color:var(--ink);font-weight:600}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:26px}
+.panel h3{font-size:13px;letter-spacing:.1em;color:var(--ink3);font-weight:500;margin-bottom:14px}
+.panel ul{list-style:none}
+.panel li{position:relative;padding-left:18px;margin-bottom:9px;color:var(--ink2);font-size:14.5px}
+.panel li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.panel li:last-child{margin-bottom:0}
+
+button.go{
+  appearance:none;border:0;cursor:pointer;font:inherit;
+  background:var(--wine);color:#fff;border-radius:999px;padding:15px 44px;
+  font-size:16px;letter-spacing:.04em;
+  box-shadow:0 8px 24px rgba(123,36,48,.22);transition:.25s;
+}
+button.go:hover{background:var(--wine-d);transform:translateY(-2px);box-shadow:0 12px 30px rgba(123,36,48,.3)}
+button.go:active{transform:translateY(0)}
+
+/* ---------- 题目 ---------- */
+.qnum{font-size:12px;letter-spacing:.2em;color:var(--gold);margin-bottom:14px}
+.qnum b{font-size:15px;color:var(--wine);font-weight:600}
+.qtitle{font-size:26px;line-height:1.42;font-weight:600;margin-bottom:8px}
+.qhint{color:var(--ink3);font-size:13.5px;margin-bottom:26px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:16px 20px;cursor:pointer;display:flex;gap:15px;align-items:flex-start;
+  transition:.2s ease;
+}
+.opt:hover{border-color:var(--wine);transform:translateX(5px);box-shadow:0 6px 22px rgba(123,36,48,.09)}
+.opt.sel{border-color:var(--wine);background:#FCF6F5}
+.dot{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);margin-top:2px;
+  display:flex;align-items:center;justify-content:center;transition:.2s}
+.opt:hover .dot{border-color:var(--wine)}
+.opt.sel .dot{border-color:var(--wine);background:var(--wine)}
+.opt.sel .dot::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+.olabel{font-size:16.5px;font-weight:500;margin-bottom:2px}
+.odesc{font-size:13.5px;color:var(--ink2);line-height:1.55}
+.back{margin-top:24px;font-size:13px;color:var(--ink3);cursor:pointer;display:inline-block;user-select:none}
+.back:hover{color:var(--wine)}
+.backwrap{text-align:center;margin-top:22px}
+.backwrap .back{margin-top:0}
+
+/* ---------- 结果：黄历日期卡 ---------- */
+.almanac{
+  background:var(--paper);border:1px solid var(--paperline);border-radius:16px;
+  padding:26px 28px 24px;margin-bottom:22px;position:relative;overflow:hidden;
+}
+.almanac::after{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(168,131,78,.28);
+  border-radius:11px;pointer-events:none;
+}
+.al-date{font-size:27px;font-weight:600;line-height:1.3}
+.al-week{font-size:13px;color:var(--ink3);margin-top:5px;letter-spacing:.06em}
+.al-lunar{font-size:15px;color:var(--wine);margin-top:12px;padding-top:12px;border-top:1px dashed var(--paperline);letter-spacing:.04em}
+.al-lunar span{color:var(--ink2);font-size:13.5px}
+.yiji{margin-top:18px;padding-top:16px;border-top:1px dashed var(--paperline);display:flex;flex-direction:column;gap:10px}
+.yi-row{display:flex;align-items:flex-start;gap:12px}
+.stamp{
+  flex:0 0 auto;width:26px;height:26px;border-radius:6px;background:var(--wine);color:#fff;
+  font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:600;margin-top:2px;
+}
+.stamp.gray{background:#B9AFA4}
+.yi-text{font-size:16px;color:var(--ink);letter-spacing:.06em;padding-top:1px}
+.yi-text em{font-style:normal;color:var(--wine)}
+.ji-text{font-size:15px;color:var(--ink2);letter-spacing:.06em;padding-top:1px}
+
+/* ---------- 结果：主推荐 ---------- */
+.hero{
+  background:linear-gradient(150deg,#3E0F18 0%,#6E1F2A 55%,#8A3A33 100%);
+  color:#fff;border-radius:18px;padding:30px 32px;margin-bottom:14px;
+  box-shadow:0 18px 44px rgba(62,15,24,.26);
+}
+.hero.soft{background:linear-gradient(150deg,#3B2A12 0%,#6E4A20 55%,#8B6A33 100%);box-shadow:0 18px 44px rgba(59,42,18,.24)}
+.hero .flag{display:inline-block;font-size:11.5px;letter-spacing:.14em;
+  background:rgba(255,255,255,.15);border-radius:999px;padding:5px 13px;margin-bottom:15px}
+.hero h2{font-size:31px;font-weight:600;line-height:1.3;margin-bottom:7px}
+.hero .meta{font-size:13px;color:rgba(255,255,255,.62);margin-bottom:20px}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{font-size:13px;color:#2A1A12;background:#EFE3D2;border-radius:999px;padding:6px 14px}
+.hero .tag{background:rgba(255,255,255,.16);color:#fff}
+.taste{font-size:15px;line-height:1.85;color:rgba(255,255,255,.9);padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
+.taste .lbl{display:block;font-size:12px;letter-spacing:.14em;color:#E9C9A8;margin-bottom:9px}
+.why{list-style:none;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
+.why li{position:relative;padding-left:17px;font-size:14.5px;color:rgba(255,255,255,.88);margin-bottom:8px;line-height:1.62}
+.why li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:#E9C9A8}
+.why li:last-child{margin-bottom:0}
+
+/* ---------- 红卡右下角的两个二维码 ---------- */
+.qrrow{display:flex;justify-content:flex-end;gap:14px;margin-top:24px;
+  padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
+.qrtile{background:#fff;border-radius:12px;padding:7px 7px 5px;text-align:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.qrtile img{display:block;width:76px;height:76px;border-radius:4px}
+.qrtile span{display:block;font-size:10.5px;color:#7B2430;margin-top:4px;
+  letter-spacing:.06em;font-weight:500}
+/* 长按手势是页面自己的功能：别让系统弹文字选择/放大镜打断。
+   二维码那枚图要单独放开，留着系统"识别图中二维码/保存图片"的菜单 */
+.hero{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.qrtile img{-webkit-touch-callout:default}
+
+/* ---------- 长按红卡后的全屏预览层 ---------- */
+.pvl{position:fixed;inset:0;z-index:130;background:rgba(20,10,12,.82);display:none;
+  overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pvl.on{display:block}
+.pvl-i{min-height:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:34px 22px;box-sizing:border-box}
+.pvl-i img{display:block;width:min(86vw,420px);border-radius:14px;
+  box-shadow:0 18px 48px rgba(0,0,0,.5)}
+.pvl-t{margin-top:16px;text-align:center;color:#fff;font-size:13.5px;line-height:1.85}
+.pvl-t b{color:#F3DEC7}
+.pvl-t span{color:rgba(255,255,255,.62);font-size:12px}
+.pvl-acts{display:flex;justify-content:center;gap:40px;margin-top:26px}
+.pvl-tip{display:none;max-width:86vw;margin-top:18px;padding:11px 18px;border-radius:999px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(243,222,199,.38);
+  color:#F7E6D2;font-size:13.5px;line-height:1.7;text-align:center}
+.pvl-tip.on{display:block}
+.pvl-act{display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer}
+.pvl-act i{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.28);transition:transform .12s}
+.pvl-act:active i{transform:scale(.92)}
+.pvl-act span{color:#fff;font-size:13px}
+.pvl-cancel{margin-top:22px;text-align:center;color:rgba(255,255,255,.85);
+  font-size:15px;padding:12px;cursor:pointer}
+
+/* 二次确认小卡 */
+.pvl-cfm{position:absolute;inset:0;display:none;background:rgba(20,10,12,.45);z-index:5}
+.pvl-cfm.on{display:block}
+.pvl-cfm-i{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);
+  width:min(78vw,340px);background:#FFFDF9;border-radius:16px;padding:22px 20px 18px;
+  box-shadow:0 18px 44px rgba(0,0,0,.4);text-align:center}
+.pvl-cfm-t{font-size:14.5px;color:#3B2B25;line-height:1.7}
+.pvl-cfm-b{display:flex;gap:12px;margin-top:18px}
+.pvl-cfm-b button{flex:1;border:0;border-radius:999px;padding:11px 0;font-size:14.5px;cursor:pointer}
+.pvl-no{background:#F1EAE0;color:#6B5340}
+.pvl-ok{background:#7B2430;color:#fff;font-weight:600}
+
+/* ---------- 右上角的转发按钮 ---------- */
+.fab{position:fixed;top:14px;right:14px;z-index:90;display:flex;align-items:center;gap:6px;
+  background:rgba(255,253,250,.94);border:1px solid var(--line);border-radius:999px;
+  padding:9px 14px;font-size:13.5px;color:var(--wine);font-weight:500;
+  box-shadow:0 6px 18px rgba(36,28,24,.18);cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.fab:active{transform:scale(.96)}
+.fab svg{display:block}
+
+/* ---------- 微信里「点右上角」的引导层 ---------- */
+.wxg{position:fixed;inset:0;z-index:120;background:rgba(20,10,12,.62);display:none}
+.wxg.on{display:block}
+.wxg-i{position:absolute;top:12px;right:16px;text-align:right;color:#fff}
+.wxg-i svg{display:block;margin-left:auto}
+.wxg-i .t{display:block;font-size:14.5px;line-height:1.75;margin-top:8px;
+  background:rgba(0,0,0,.5);border-radius:12px;padding:11px 15px;text-align:left;max-width:78vw}
+.wxg-i .t b{color:#F3DEC7}
+
+.block{margin-top:30px}
+.block h3{font-size:13px;letter-spacing:.14em;color:var(--ink3);font-weight:500;margin-bottom:14px}
+.warn{background:#FDF8F3;border:1px solid #F0E3D4;border-radius:14px;padding:20px 22px}
+.warn ul{list-style:none}
+.warn li{position:relative;padding-left:20px;font-size:14px;color:#6B5340;margin-bottom:10px;line-height:1.62}
+.warn li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+.warn li:last-child{margin-bottom:0}
+.note{font-size:14.5px;color:var(--ink2);line-height:1.8}
+.note b{color:var(--ink);font-weight:600}
+.footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink3);line-height:1.7}
+.again{margin-top:30px}
+
+/* ---------- 首页承诺句 ---------- */
+.promise{font-size:19px;color:var(--wine);letter-spacing:.1em;font-weight:500;text-align:center;padding:8px 0 4px}
+
+/* ---------- 三个候选卡 ---------- */
+.picknote{font-size:13.5px;color:var(--ink3);margin-bottom:20px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:26px 26px 22px;margin-bottom:16px;cursor:pointer;transition:.22s;position:relative;
+}
+.card:hover{border-color:var(--wine);transform:translateY(-3px);box-shadow:0 14px 34px rgba(123,36,48,.13)}
+.card.best{border-color:#DCC3A6;background:linear-gradient(180deg,#FFFCF7,#FFFDFA)}
+.badge{
+  position:absolute;top:-11px;left:24px;background:var(--wine);color:#fff;
+  font-size:11.5px;letter-spacing:.1em;border-radius:999px;padding:4px 13px;
+}
+.card h3{font-size:24px;font-weight:600;margin-bottom:5px}
+.card .meta{font-size:13px;color:var(--ink3);margin-bottom:15px}
+.card .desc{font-size:14.5px;color:var(--ink2);line-height:1.75;margin-bottom:12px;
+  padding-left:14px;border-left:2px solid var(--line)}
+.card .kw{font-size:13.5px;color:var(--ink2);margin-bottom:14px}
+.card .wholine{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
+.card .pick{
+  font-size:14.5px;color:var(--wine);font-weight:500;letter-spacing:.06em;
+  padding-top:15px;border-top:1px dashed var(--line);
+}
+.card:hover .pick{color:var(--wine-d)}
+
+/* ---------- 保存与分享 ---------- */
+.acts{display:flex;flex-wrap:wrap;gap:11px}
+button.ghost{
+  appearance:none;cursor:pointer;font:inherit;background:#fff;color:var(--wine);
+  border:1px solid #E2D2C9;border-radius:999px;padding:14px 30px;font-size:15px;transition:.2s;
+}
+button.ghost:hover{background:#FCF6F5;border-color:var(--wine)}
+button.ghost:disabled{opacity:.55;cursor:default}
+.sharewrap{margin-top:22px;text-align:center}
+.sharewrap img{width:100%;max-width:330px;border-radius:14px;box-shadow:0 14px 36px rgba(62,15,24,.22)}
+.sharetip{font-size:13px;color:var(--ink3);margin-top:14px;line-height:1.75}
+/* 分享链接 + 二维码 */
+.sharerow{margin-top:18px;display:flex;gap:15px;align-items:flex-start;background:var(--paper);border:1px solid var(--paperline);border-radius:14px;padding:15px}
+.sharerow img.qr{width:96px;height:96px;flex:0 0 auto;background:#fff;border-radius:9px;padding:5px;border:1px solid var(--line);display:block}
+.sharerow .sr{min-width:0;flex:1}
+.sharerow .srt{font-size:14px;font-weight:500;color:var(--ink);line-height:1.5;margin-bottom:7px}
+.sharerow .sru{font-size:11.5px;color:#8A7A6D;word-break:break-all;line-height:1.5;margin-bottom:10px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.sharerow .srn{font-size:12.5px;color:var(--ink2);line-height:1.68;margin-top:10px}
+.sharerow button.ghost{padding:9px 20px;font-size:13px}
+@media (max-width:600px){
+  .sharerow{gap:13px;padding:14px}
+  .sharerow img.qr{width:84px;height:84px}
+}
+.mapt-inline{color:var(--wine)}
+
+@media (max-width:600px){
+  .wrap{padding-top:32px}
+  h1{font-size:29px}
+  .qtitle{font-size:21px}
+  .al-date{font-size:22px}
+  .hero{padding:24px 22px}
+  .hero h2{font-size:25px}
+  .panel{padding:20px 18px}
+  .almanac{padding:22px 20px 20px}
+}
+</style>
+</head>
+<body>
+<!-- 微信「转发给朋友」的卡片缩略图：微信会抓页面里靠前的、够大的一张图来当小方块，
+     所以把 og:image 用的这张 cover.png 放在最前面（对用户不可见）。 -->
+<img src="https://zhaolynn007.github.io/what-to-drink-today/cover.png" alt="" style="position:absolute;left:-9999px;top:0;width:300px;height:300px">
+<div class="wrap">
+  <div class="bar"><i id="bar"></i></div>
+  <div id="view"></div>
+</div>
+
+<!-- 右上角的转发按钮：手机上唤起系统分享，微信里引导去点右上角的 ··· -->
+<div class="fab" id="fab" role="button" aria-label="转发给朋友">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7B2430" stroke-width="2.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 3v13"/><path d="M7 8l5-5 5 5"/>
+  </svg>转发
+</div>
+
+<!-- 微信内置浏览器里：程序唤不起分享面板，只能引导用户去点右上角 -->
+<div class="wxg" id="wxg">
+  <div class="wxg-i">
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#F3DEC7" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 17L17 7"/><path d="M9 7h8v8"/>
+    </svg>
+    <span class="t">点右上角的 <b>···</b>，<br>选 <b>转发给朋友</b> 发到群聊，<br>或选 <b>分享到朋友圈</b>。</span>
+  </div>
+</div>
+
+<!-- 长按红卡后弹出的预览层：图已经生成好，长按它走系统菜单"保存图片" -->
+<div class="pvl" id="pvl">
+  <div class="pvl-i">
+    <img id="pvlimg" alt="今天这一瓶">
+    <!-- 自动下载走不通时用的常驻提示条：微信里存图只能靠长按，
+         两秒就消失的 toast 太容易被整个晃过去，所以这条要一直杵在那儿 -->
+    <div class="pvl-tip" id="pvltip"></div>
+    <div class="pvl-acts">
+      <div class="pvl-act" id="pvlwx" role="button" aria-label="发给微信朋友">
+        <i style="background:#4FCB50"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff">
+          <path d="M9.5 4C5.9 4 3 6.4 3 9.4c0 1.7 1 3.2 2.4 4.2L4.8 16l2.6-1.4c.7.2 1.4.3 2.1.3h.4c-.1-.4-.2-.9-.2-1.3 0-2.9 2.8-5.2 6.2-5.2h.3C15.6 5.9 12.8 4 9.5 4zM7.5 7.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm4 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8z"/>
+          <path d="M21 13.6c0-2.5-2.5-4.6-5.5-4.6S10 11.1 10 13.6s2.5 4.6 5.5 4.6c.6 0 1.2-.1 1.8-.3l2.3 1.2-.5-2.1c1.1-.8 1.9-2 1.9-3.4zm-7.3-1.2a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zm3.6 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/>
+        </svg></i>
+        <span>微信</span>
+      </div>
+      <div class="pvl-act" id="pvlpyq" role="button" aria-label="发朋友圈">
+        <i style="background:#667BC4"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round">
+          <circle cx="12" cy="12" r="8.6"/>
+          <path d="M12 3.4v8.6l6.2 4.4"/><path d="M12 12 4.2 14.6"/><path d="m17.5 6.4-5.5 5.6-7.2-1.1"/><path d="M12 12l1.3 8.4"/>
+        </svg></i>
+        <span>朋友圈</span>
+      </div>
+      <div class="pvl-act" id="pvlsave" role="button" aria-label="保存图片">
+        <i style="background:#F5B90F"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 19.5h14"/>
+        </svg></i>
+        <span>保存</span>
+      </div>
+    </div>
+    <div class="pvl-cancel" id="pvlcancel" role="button">取消</div>
+  </div>
+
+  <!-- 二次确认：给测试者「确认 / 取消」的选择权 -->
+  <div class="pvl-cfm" id="pvlcfm">
+    <div class="pvl-cfm-i">
+      <div class="pvl-cfm-t" id="pvlcfmt"></div>
+      <div class="pvl-cfm-b">
+        <button class="pvl-no" id="pvlcno" type="button">取消</button>
+        <button class="pvl-ok" id="pvlcok" type="button">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 结果浮层：点中某一张推荐后"浮"上来，底下仍然是"三个推荐"那一页 -->
+<div class="ovl" id="overlay"></div>
+
+<script>
+/* =====================================================================
+   农历数据表（1900—2100）
+   每个元素：低 4 位 = 闰月月份（0 表示无闰月）
+            第 5—16 位 = 12 个月的大小月（1=30 天，0=29 天）
+            第 17 位 = 闰月天数（1=30 天，0=29 天）
+   ===================================================================== */
+var LUNAR_INFO = [
+0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,
+0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,
+0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,
+0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,
+0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6,0x0a4e0,0x0d260,0x0ea65,0x0d530,
+0x05aa0,0x076a3,0x096d0,0x04bd7,0x04ad0,0x0a4d0,0x1d0b6,0x0d250,0x0d520,0x0dd45,
+0x0b5a0,0x056d0,0x055b2,0x049b0,0x0a577,0x0a4b0,0x0aa50,0x1b255,0x06d20,0x0ada0,
+0x14b63,0x09370,0x049f8,0x04970,0x064b0,0x168a6,0x0ea50,0x06b20,0x1a6c4,0x0aae0,
+0x0a2e0,0x0d2e3,0x0c960,0x0d557,0x0d4a0,0x0da50,0x05d55,0x056a0,0x0a6d0,0x055d4,
+0x052d0,0x0a9b8,0x0a950,0x0b4a0,0x0b6a6,0x0ad50,0x055a0,0x0aba4,0x0a5b0,0x052b0,
+0x0b273,0x06930,0x07337,0x06aa0,0x0ad50,0x14b55,0x04b60,0x0a570,0x054e4,0x0d160,
+0x0e968,0x0d520,0x0daa0,0x16aa6,0x056d0,0x04ae0,0x0a9d4,0x0a2d0,0x0d150,0x0f252,
+0x0d520
+];
+var LUNAR_BASE = Date.UTC(1900, 0, 31);   // 1900-01-31 = 农历1900年正月初一
+
+function leapMonth(y){ return LUNAR_INFO[y - 1900] & 0xf; }
+function leapDays(y){
+  if(!leapMonth(y)) return 0;
+  return (LUNAR_INFO[y - 1900] & 0x10000) ? 30 : 29;
+}
+function monthDays(y, m){ return (LUNAR_INFO[y - 1900] & (0x10000 >> m)) ? 30 : 29; }
+function lunarYearDays(y){
+  var sum = 348;
+  for(var i = 0x8000; i > 0x8; i >>= 1){ sum += (LUNAR_INFO[y - 1900] & i) ? 1 : 0; }
+  return sum + leapDays(y);
+}
+function solarToLunar(d){
+  var offset = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - LUNAR_BASE) / 86400000);
+  var temp = 0, y;
+  for(y = 1900; y < 2101 && offset > 0; y++){
+    temp = lunarYearDays(y);
+    offset -= temp;
+  }
+  if(offset < 0){ offset += temp; y--; }
+  var year = y, leap = leapMonth(year), isLeap = false, m;
+  for(m = 1; m < 13 && offset > 0; m++){
+    if(leap > 0 && m === leap + 1 && !isLeap){
+      --m; isLeap = true; temp = leapDays(year);
+    } else {
+      temp = monthDays(year, m);
+    }
+    if(isLeap && m === leap + 1) isLeap = false;
+    offset -= temp;
+  }
+  if(offset === 0 && leap > 0 && m === leap + 1){
+    if(isLeap){ isLeap = false; } else { isLeap = true; --m; }
+  }
+  if(offset < 0){ offset += temp; --m; }
+  return {year: year, month: m, day: offset + 1, isLeap: isLeap};
+}
+
+var GAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+var ZHI = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+var SX  = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
+var LM  = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+var WK  = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+function ganzhiYear(y){
+  return GAN[((y - 4) % 10 + 10) % 10] + ZHI[((y - 4) % 12 + 12) % 12];
+}
+function lunarDayName(d){
+  if(d === 10) return '初十';
+  if(d === 20) return '二十';
+  if(d === 30) return '三十';
+  return ['初','十','廿','三'][Math.floor(d / 10)] + ['一','二','三','四','五','六','七','八','九','十'][(d - 1) % 10];
+}
+
+/* =====================================================================
+   题目：全部基于吃喝经验，不出现"单宁／酸度／酒体"这类术语
+   fx 给出该选项指向的风格值，最后按维度取平均
+   body 浓淡 / tannin 涩 / acid 酸 / sweet 甜 / fruit 果香 / oak 烤香
+   ===================================================================== */
+var QUESTIONS = [
+  {
+    t:'你平时喝什么比较多？',
+    h:'不用懂酒，就按平时喝饮料的习惯选。',
+    opts:[
+      {l:'黑咖啡、浓茶、普洱', d:'能吃苦，也能接受涩', fx:{tannin:4.3, body:3.6, oak:2.6}},
+      {l:'拿铁、奶茶、摩卡', d:'喜欢柔顺、带点奶香', fx:{tannin:2.0, body:3.6, oak:3.4}},
+      {l:'柠檬水、气泡水、果茶', d:'喜欢清爽，酸一点也行', fx:{tannin:1.6, body:2.2, acid:4.3}},
+      {l:'豆浆、酸奶、米汤、白开水', d:'喜欢温和淡雅的', fx:{tannin:1.4, body:2.0, acid:2.6}}
+    ]
+  },
+  {
+    id:'abv',
+    t:'这次想喝多少度的？',
+    h:'不想碰酒精也完全没问题，后面会给你换成别的喝的。',
+    opts:[
+      {l:'0 酒精，一滴都不碰', d:'奶茶、果汁、无醇气泡这些都算', fx:{abv:'none'}},
+      {l:'度数低一点，意思一下就行', d:'像果酒、啤酒那种', fx:{abv:'low'}},
+      {l:'正常的度数就行', d:'', fx:{abv:'mid'}},
+      {l:'想要有劲一点的', d:'', fx:{abv:'high'}}
+    ]
+  },
+  {
+    t:'你平时吃的口味偏哪一边？',
+    h:'想想你平时最常吃的那几顿。',
+    opts:[
+      {l:'清淡的', d:'清蒸、白灼、青菜、粥', fx:{body:2.1, oak:1.4}},
+      {l:'家常的', d:'炒菜、米饭、红烧肉', fx:{body:3.1, oak:2.4}},
+      {l:'重口的', d:'麻辣、烧烤、酱爆、卤味', fx:{body:4.4, oak:3.4}}
+    ]
+  },
+  {
+    t:'酸的东西你能接受吗？',
+    h:'比如山楂、柠檬、酸梅汤。',
+    opts:[
+      {l:'能吃酸，越酸越带劲', d:'', fx:{acid:4.5}},
+      {l:'一般，别太酸就行', d:'', fx:{acid:3.0}},
+      {l:'不太喜欢，酸了会皱眉', d:'', fx:{acid:2.1}}
+    ]
+  },
+  {
+    t:'甜的呢？',
+    h:'奶茶点几分糖也算。',
+    opts:[
+      {l:'基本不吃甜，咖啡不加糖', d:'', fx:{sweet:0.2}},
+      {l:'偶尔来点甜的', d:'', fx:{sweet:2.0}},
+      {l:'很喜欢甜，奶茶三分糖以上', d:'', fx:{sweet:4.3}}
+    ]
+  },
+  {
+    t:'下面哪种香味最让你舒服？',
+    h:'闻着舒服就行，不用管是什么酒。',
+    opts:[
+      {l:'新鲜水果味', d:'草莓、荔枝、桃子、柑橘', fx:{fruit:4.8, oak:1.4}},
+      {l:'花香、香料味', d:'茉莉、桂花、陈皮、八角', fx:{fruit:2.6, oak:2.0}},
+      {l:'烤过的香味', d:'烤面包、焦糖、巧克力、香草', fx:{oak:4.6, fruit:3.4}}
+    ]
+  },
+  {
+    t:'这次主要配什么吃？',
+    h:'不确定就选你吃得最多的那一类。',
+    opts:[
+      {l:'火锅、川菜、小龙虾', d:'', fx:{food:'hotpot'}},
+      {l:'家常菜、炒菜、米饭', d:'', fx:{food:'home'}},
+      {l:'烧烤、卤味、宵夜下酒菜', d:'', fx:{food:'bbq'}},
+      {l:'海鲜、清蒸、白灼', d:'', fx:{food:'seafood'}},
+      {l:'奶酪、火腿、面包', d:'', fx:{food:'cheese'}},
+      {l:'甜点、水果', d:'', fx:{food:'dessert'}},
+      {l:'不配吃的，就单喝', d:'', fx:{food:'none'}}
+    ]
+  },
+  {
+    t:'这次是什么场合、跟谁？',
+    h:'同一瓶酒，一个人喝和一群人喝是完全两回事。',
+    opts:[
+      {l:'露营、野餐、户外', d:'', fx:{scene:'outdoor'}},
+      {l:'下午茶、一个人待着', d:'', fx:{scene:'afternoon'}},
+      {l:'朋友聚会小酌', d:'', fx:{scene:'friends'}},
+      {l:'家人聚餐、过节饭桌', d:'', fx:{scene:'family'}},
+      {l:'送礼、正式饭局', d:'', fx:{scene:'gift'}},
+      {l:'约会、两个人的氛围', d:'', fx:{scene:'date'}}
+    ]
+  },
+  {
+    t:'一瓶酒你大概愿意花多少？',
+    h:'按你真实会买的价位选。',
+    opts:[
+      {l:'几十块，随便喝喝', d:'', fx:{price:1}},
+      {l:'一两百，日常能接受', d:'', fx:{price:2}},
+      {l:'三五百，有点特别的日子', d:'', fx:{price:3}},
+      {l:'上千，重要场合', d:'', fx:{price:4}}
+    ]
+  },
+  {
+    id:'fear',
+    multi:true,
+    mh:'可以多选。怕哪几样都点上；一个都不点，就是没什么特别怕的。',
+    t:'喝酒的时候，你最怕遇到什么？',
+    h:'说说你最不喜欢的那种感觉。',
+    opts:[
+      {l:'怕涩，喝完嘴巴发干发紧', d:'', fx:{tannin:1.4}},
+      {l:'怕酸，牙都酸倒那种', d:'', fx:{acid:1.8}},
+      {l:'怕甜，腻得喝不下去', d:'', fx:{sweet:0.3}},
+      {l:'怕没味道，像喝水一样', d:'', fx:{body:4.3, fruit:4.3}}
+    ]
+  },
+  {
+    id:'type',
+    t:'想喝哪一种？',
+    h:'选你第一感觉想开的那瓶。',
+    opts:[
+      {l:'红的', d:'最有仪式感，配饭也稳', fx:{type:'red'}},
+      {l:'白的', d:'清爽，喝着轻快', fx:{type:'white'}},
+      {l:'带气泡的', d:'开瓶就有气氛', fx:{type:'spark'}},
+      {l:'粉的', d:'好看，轻松好喝', fx:{type:'rose'}},
+      {l:'甜的', d:'就想喝点甜的', fx:{type:'sweet'}},
+      {l:'都行，你帮我定', d:'', fx:{type:'any'}}
+    ],
+    // 第 2 题选了「0 酒精」时，这一题自动换成不含酒精的选项
+    soft:{
+      t:'想喝哪一种？',
+      h:'不含酒精的这几类，选你第一感觉想喝的。',
+      opts:[
+        {l:'茶饮、奶茶', d:'茶味重一点的', fx:{stype:'tea'}},
+        {l:'果汁、果昔', d:'水果味的', fx:{stype:'juice'}},
+        {l:'带气泡的', d:'气泡水、无醇起泡', fx:{stype:'spark'}},
+        {l:'热饮', d:'热可可、热奶茶', fx:{stype:'cocoa'}},
+        {l:'都行，你帮我定', d:'', fx:{stype:'any'}}
+      ]
+    }
+  },
+  {
+    id:'age',
+    t:'最后一个问题：你满 18 岁了吗？',
+    h:'这一题只用来决定推荐哪一类饮品。',
+    opts:[
+      {l:'18 岁以下', d:'', fx:{age:'minor'}},
+      {l:'18 岁以上', d:'', fx:{age:'adult'}}
+    ]
+  }
+];
+
+/* =====================================================================
+   酒款库：只到「产区 + 品种／风格」，不出现酒庄名与具体酒款名
+   ===================================================================== */
+var WINES = [
+ /* 法国 */
+ {n:'勃艮第黑皮诺', c:'法国', r:'勃艮第', t:'red', fam:'pinot', body:2.2, tannin:2.0, acid:4.5, sweet:0.3, fruit:3.6, oak:2.8, price:4, cls:1, foods:['home','cheese','seafood'], scenes:['family','date','gift'], kw:['红樱桃味','一点落叶和树林的气息','入口很轻']},
+ {n:'勃艮第霞多丽', c:'法国', r:'勃艮第', t:'white', fam:'chardonnay', body:3.2, tannin:1, acid:4.2, sweet:0.3, fruit:3.4, oak:3.6, price:4, cls:1, foods:['seafood','cheese','home'], scenes:['family','gift','date'], kw:['白桃味','榛子和黄油的香','顺滑']},
+ {n:'夏布利霞多丽', c:'法国', r:'夏布利', t:'white', fam:'chardonnay', body:2.2, tannin:1, acid:5.0, sweet:0.2, fruit:2.2, oak:1.0, price:3, cls:1, foods:['seafood','home'], scenes:['family','date','afternoon'], kw:['青柠檬','一股像石头一样的凉意','特别清爽']},
+ {n:'波尔多左岸混酿', c:'法国', r:'波尔多', t:'red', fam:'cab-blend', body:4.6, tannin:4.6, acid:4.2, sweet:0.4, fruit:3.2, oak:4.2, price:3, cls:1, foods:['home','cheese'], scenes:['family','gift','date'], kw:['黑加仑味','雪松和铅笔芯的味道','有分量']},
+ {n:'波尔多右岸梅洛主导混酿', c:'法国', r:'波尔多', t:'red', fam:'merlot-blend', body:4.2, tannin:3.4, acid:3.6, sweet:0.6, fruit:4.2, oak:3.6, price:3, cls:1, foods:['home','cheese','hotpot'], scenes:['family','gift','date'], kw:['黑李子味','巧克力味','口感像丝绒']},
+ {n:'波尔多干白', c:'法国', r:'波尔多', t:'white', fam:'bordeaux-white', body:2.8, tannin:1, acid:4.4, sweet:0.8, fruit:3.4, oak:1.8, price:2, cls:1, foods:['seafood','home'], scenes:['family','afternoon','date'], kw:['青柠和白桃','一点蜂蜜香','干爽']},
+ {n:'罗纳河谷 GSM 混酿', c:'法国', r:'南罗纳', t:'red', fam:'gsm', body:4.0, tannin:3.4, acid:3.6, sweet:0.8, fruit:4.4, oak:2.4, price:2, cls:1, foods:['home','bbq','hotpot'], scenes:['friends','family','outdoor'], kw:['覆盆子味','黑胡椒和甘草','喝着暖和']},
+ {n:'北罗纳西拉', c:'法国', r:'北罗纳', t:'red', fam:'syrah', body:4.5, tannin:4.2, acid:4.2, sweet:0.5, fruit:3.2, oak:3.4, price:4, cls:1, foods:['home','bbq'], scenes:['family','gift','date'], kw:['黑橄榄和培根味','紫罗兰花香','味道很重']},
+ {n:'卢瓦尔桑塞尔长相思', c:'法国', r:'卢瓦尔', t:'white', fam:'sauvignon', body:2.0, tannin:1, acid:5.0, sweet:0.2, fruit:3.2, oak:1.0, price:3, cls:1, foods:['seafood','cheese','dessert'], scenes:['family','date','afternoon'], kw:['西柚味','青草和火石的味道','酸得利落']},
+ {n:'卢瓦尔品丽珠', c:'法国', r:'卢瓦尔', t:'red', fam:'cab-franc', body:2.6, tannin:3.2, acid:4.4, sweet:0.6, fruit:3.8, oak:1.5, price:2, cls:1, foods:['home','cheese','bbq'], scenes:['friends','family','afternoon'], kw:['红醋栗味','一点青椒味','轻快']},
+ {n:'博若莱佳美', c:'法国', r:'博若莱', t:'red', fam:'gamay', body:2.0, tannin:1.6, acid:4.2, sweet:0.8, fruit:5.0, oak:1.0, price:2, cls:1, foods:['home','bbq','hotpot'], scenes:['friends','outdoor','date'], kw:['草莓和泡泡糖味','冰一下更好喝','特别顺口']},
+ {n:'阿尔萨斯雷司令（干型）', c:'法国', r:'阿尔萨斯', t:'white', fam:'riesling', body:3.0, tannin:1, acid:5.0, sweet:0.6, fruit:3.2, oak:1.0, price:3, cls:1, foods:['seafood','hotpot','home','dessert'], scenes:['family','date','afternoon'], kw:['青苹果和柠檬','像石头一样的矿物味','干爽']},
+ {n:'阿尔萨斯灰皮诺', c:'法国', r:'阿尔萨斯', t:'white', fam:'pinot-gris', body:3.6, tannin:1, acid:3.2, sweet:0.8, fruit:3.6, oak:1.6, price:3, cls:1, foods:['seafood','home','hotpot'], scenes:['family','date'], kw:['黄桃味','一点烟熏和杏仁','圆润']},
+ {n:'香槟', c:'法国', r:'香槟', t:'spark', fam:'champagne', body:3.0, tannin:1, acid:5.0, sweet:1.2, fruit:3.2, oak:1.5, price:3, cls:1, foods:['seafood','cheese','dessert'], scenes:['friends','gift','date','outdoor'], kw:['青苹果味','烤面包的香','气泡很细']},
+ {n:'普罗旺斯桃红', c:'法国', r:'普罗旺斯', t:'rose', fam:'provence-rose', body:2.0, tannin:1.5, acid:4.2, sweet:0.8, fruit:3.6, oak:1.0, price:2, cls:1, foods:['seafood','home','bbq'], scenes:['outdoor','date','friends'], kw:['白桃和红醋栗','干爽','冰镇最好喝']},
+ {n:'塔维勒桃红', c:'法国', r:'南罗纳', t:'rose', fam:'tavel-rose', body:3.4, tannin:2.4, acid:4.0, sweet:0.6, fruit:4.0, oak:1.2, price:3, cls:1, foods:['home','bbq','hotpot'], scenes:['friends','outdoor','date'], kw:['红莓和石榴','颜色是宝石红','比一般桃红更有分量']},
+ {n:'波尔多苏玳贵腐甜白', c:'法国', r:'波尔多', t:'sweet', fam:'sauternes', body:4.0, tannin:1, acid:4.2, sweet:5.0, fruit:5.0, oak:2.5, price:4, cls:1, foods:['dessert','cheese'], scenes:['gift','family','afternoon'], kw:['蜂蜜和杏干','藏红花','很甜']},
+ {n:'卢瓦尔武弗雷白诗南', c:'法国', r:'卢瓦尔', t:'white', fam:'chenin', body:3.2, tannin:1, acid:5.0, sweet:2.6, fruit:4.0, oak:1.5, price:3, cls:1, foods:['seafood','dessert','hotpot'], scenes:['family','date','afternoon'], kw:['蜂蜡和梨','湿石头味','甜度可高可低']},
+ {n:'朗格多克－鲁西荣混酿', c:'法国', r:'法国南部', t:'red', fam:'s-french', body:3.8, tannin:3.2, acid:3.4, sweet:1.0, fruit:4.8, oak:2.0, price:1, cls:1, foods:['home','bbq','hotpot'], scenes:['friends','outdoor','family'], kw:['黑莓味','香草和灌木的香','便宜又好喝']},
+ {n:'卡奥尔马尔贝克', c:'法国', r:'法国西南', t:'red', fam:'cahors', body:4.4, tannin:4.4, acid:4.0, sweet:0.6, fruit:3.6, oak:2.0, price:2, cls:1, foods:['home','bbq'], scenes:['family','date'], kw:['黑莓味','皮革和香料','颜色很深']},
+ /* 意大利 */
+ {n:'基安蒂桑娇维塞', c:'意大利', r:'托斯卡纳', t:'red', fam:'sangiovese', body:3.4, tannin:4.0, acid:5.0, sweet:0.4, fruit:3.6, oak:2.5, price:2, cls:1, foods:['home','bbq','cheese'], scenes:['family','friends','date'], kw:['酸樱桃','番茄叶和皮革','又酸又涩但很配饭']},
+ {n:'蒙塔希诺布鲁奈罗', c:'意大利', r:'托斯卡纳', t:'red', fam:'brunello', body:4.6, tannin:5.0, acid:5.0, sweet:0.4, fruit:3.0, oak:4.0, price:4, cls:1, foods:['home','cheese'], scenes:['gift','family','date'], kw:['干樱桃','玫瑰和焦油','很有劲']},
+ {n:'巴罗洛内比奥罗', c:'意大利', r:'皮埃蒙特', t:'red', fam:'nebbiolo', body:4.5, tannin:5.0, acid:5.0, sweet:0.2, fruit:2.6, oak:3.0, price:4, cls:1, foods:['home','cheese'], scenes:['gift','family'], kw:['玫瑰和焦油','松露味','涩感极强']},
+ {n:'皮埃蒙特巴贝拉', c:'意大利', r:'皮埃蒙特', t:'red', fam:'barbera', body:3.0, tannin:2.6, acid:5.0, sweet:0.8, fruit:4.2, oak:1.6, price:2, cls:1, foods:['home','bbq','cheese'], scenes:['friends','family','afternoon'], kw:['黑樱桃味','紫罗兰花香','酸但不涩']},
+ {n:'威尼托阿玛罗尼', c:'意大利', r:'威尼托', t:'red', fam:'amarone', body:5.0, tannin:4.0, acid:3.6, sweet:2.4, fruit:4.2, oak:3.2, price:3, cls:1, foods:['home','cheese'], scenes:['gift','family'], kw:['葡萄干和巧克力','无花果','厚重']},
+ {n:'意大利北部灰皮诺', c:'意大利', r:'东北部', t:'white', fam:'pinot-grigio', body:2.0, tannin:1, acid:4.2, sweet:0.4, fruit:2.6, oak:1.0, price:2, cls:1, foods:['seafood','home'], scenes:['friends','afternoon','outdoor'], kw:['青梨味','白花香','清淡']},
+ {n:'西西里埃特纳红', c:'意大利', r:'西西里', t:'red', fam:'etna', body:2.6, tannin:2.8, acid:5.0, sweet:0.4, fruit:3.2, oak:1.6, price:2, cls:1, foods:['home','seafood','hotpot'], scenes:['date','friends','afternoon'], kw:['红莓味','火山灰和烟熏味','轻但有性格']},
+ {n:'普利亚普里米蒂沃', c:'意大利', r:'普利亚', t:'red', fam:'primitivo', body:4.6, tannin:3.2, acid:3.2, sweet:2.0, fruit:5.0, oak:2.4, price:1, cls:1, foods:['home','bbq','hotpot'], scenes:['friends','outdoor','family'], kw:['黑莓果酱味','香草','饱满还带一点甜']},
+ {n:'莫斯卡托阿斯蒂', c:'意大利', r:'皮埃蒙特', t:'spark', fam:'moscato', body:1.8, tannin:1, acid:3.6, sweet:4.4, fruit:5.0, oak:0.5, price:1, cls:1, foods:['dessert','hotpot'], scenes:['friends','outdoor','afternoon'], kw:['白桃和荔枝','有一点点气泡','甜甜的']},
+ {n:'普罗塞克', c:'意大利', r:'威尼托', t:'spark', fam:'prosecco', body:1.8, tannin:1, acid:4.0, sweet:2.2, fruit:4.6, oak:0.5, price:1, cls:1, foods:['seafood','hotpot','dessert'], scenes:['friends','outdoor','date'], kw:['青苹果味','白花香','气泡轻快']},
+ {n:'普利亚桃红', c:'意大利', r:'普利亚', t:'rose', fam:'puglia-rose', body:2.4, tannin:1.6, acid:4.0, sweet:0.8, fruit:4.0, oak:1.0, price:1, cls:1, foods:['seafood','home','bbq'], scenes:['outdoor','date','friends'], kw:['红莓和柑橘','活泼','好搭配']},
+ /* 西班牙 */
+ {n:'里奥哈丹魄珍藏', c:'西班牙', r:'里奥哈', t:'red', fam:'rioja', body:3.6, tannin:3.6, acid:4.0, sweet:0.8, fruit:3.6, oak:4.0, price:2, cls:1, foods:['home','cheese','bbq'], scenes:['family','friends','date'], kw:['红樱桃味','香草和椰子的桶味','柔顺']},
+ {n:'杜埃罗河岸丹魄', c:'西班牙', r:'杜埃罗河岸', t:'red', fam:'ribera', body:4.6, tannin:4.6, acid:4.0, sweet:0.6, fruit:3.6, oak:4.2, price:3, cls:1, foods:['home','bbq'], scenes:['family','gift','date'], kw:['黑莓味','咖啡味','很有劲']},
+ {n:'下海湾阿尔巴利诺', c:'西班牙', r:'下海湾', t:'white', fam:'albarino', body:2.0, tannin:1, acid:5.0, sweet:0.4, fruit:2.6, oak:1.0, price:2, cls:1, foods:['seafood','dessert'], scenes:['family','date','afternoon'], kw:['柠檬皮和海盐','白桃','特别清爽']},
+ {n:'卡瓦起泡', c:'西班牙', r:'加泰罗尼亚', t:'spark', fam:'cava', body:2.0, tannin:1, acid:4.6, sweet:1.2, fruit:2.8, oak:1.0, price:1, cls:1, foods:['seafood','cheese','dessert'], scenes:['friends','outdoor','date'], kw:['青苹果味','烤杏仁','气泡']},
+ {n:'菲诺雪莉', c:'西班牙', r:'赫雷斯', t:'fortified', fam:'fino', body:2.0, tannin:1, acid:5.0, sweet:0.4, fruit:2.0, oak:1.0, price:2, cls:1, odd:1, foods:['seafood','cheese'], scenes:['afternoon','family'], kw:['海风和杏仁','面包味','很干，还带一点咸']},
+ {n:'纳瓦拉桃红', c:'西班牙', r:'纳瓦拉', t:'rose', fam:'navarra-rose', body:2.2, tannin:1.5, acid:4.0, sweet:1.0, fruit:4.0, oak:1.0, price:1, cls:1, foods:['seafood','home','bbq'], scenes:['outdoor','friends','date'], kw:['草莓和西瓜','多汁','随手就能喝']},
+ /* 德国 / 奥地利 */
+ {n:'摩泽尔雷司令（半干）', c:'德国', r:'摩泽尔', t:'white', fam:'mosel-riesling', body:2.0, tannin:1, acid:5.0, sweet:2.6, fruit:4.2, oak:0.5, price:3, cls:1, foods:['hotpot','seafood','dessert'], scenes:['family','date','afternoon'], kw:['青柠和白桃','矿物味','甜里带酸']},
+ {n:'莱茵高雷司令（干型）', c:'德国', r:'莱茵高', t:'white', fam:'rheingau', body:3.0, tannin:1, acid:5.0, sweet:0.4, fruit:2.6, oak:1.0, price:3, cls:1, foods:['seafood','hotpot','cheese'], scenes:['family','date','gift'], kw:['青苹果味','湿石头味','干爽']},
+ {n:'德国雷司令逐粒精选甜白', c:'德国', r:'莱茵／摩泽尔', t:'sweet', fam:'eiswein', body:4.0, tannin:1, acid:5.0, sweet:5.0, fruit:5.0, oak:1.0, price:4, cls:1, foods:['dessert','cheese'], scenes:['gift','afternoon'], kw:['杏脯和蜂蜜','柑橘皮','甜但清爽']},
+ {n:'奥地利绿维特利纳', c:'奥地利', r:'下奥地利', t:'white', fam:'gruner', body:2.6, tannin:1, acid:5.0, sweet:0.4, fruit:2.8, oak:1.0, price:2, cls:1, foods:['seafood','home','hotpot','dessert'], scenes:['family','friends','afternoon'], kw:['白胡椒和青豆','柑橘','爽脆']},
+ {n:'奥地利蓝佛朗克', c:'奥地利', r:'布尔根兰', t:'red', fam:'blaufrankisch', body:3.6, tannin:3.6, acid:4.2, sweet:0.6, fruit:4.2, oak:2.0, price:2, cls:1, foods:['home','bbq','cheese'], scenes:['family','friends'], kw:['黑莓味','丁香和烟熏','不轻不重']},
+ /* 新世界 */
+ {n:'马尔堡长相思', c:'新西兰', r:'马尔堡', t:'white', fam:'nz-sauv', body:2.0, tannin:1, acid:5.0, sweet:0.6, fruit:5.0, oak:0.5, price:2, cls:0, foods:['seafood','hotpot'], scenes:['friends','outdoor','afternoon'], kw:['百香果和青椒','青柠','果味特别冲']},
+ {n:'中奥塔哥黑皮诺', c:'新西兰', r:'中奥塔哥', t:'red', fam:'nz-pinot', body:3.0, tannin:2.4, acid:4.2, sweet:0.4, fruit:4.4, oak:2.6, price:3, cls:0, foods:['home','seafood','cheese'], scenes:['date','family','gift'], kw:['黑樱桃味','香料味','丝滑']},
+ {n:'霍克斯湾波尔多混酿', c:'新西兰', r:'霍克斯湾', t:'red', fam:'nz-bdx', body:4.4, tannin:4.0, acid:4.2, sweet:0.6, fruit:4.6, oak:3.2, price:3, cls:0, foods:['home','bbq','cheese'], scenes:['family','gift','date'], kw:['黑加仑味','雪松和薄荷','有骨架']},
+ {n:'巴罗萨西拉', c:'澳大利亚', r:'巴罗萨', t:'red', fam:'barossa', body:5.0, tannin:4.0, acid:3.2, sweet:2.0, fruit:5.0, oak:4.2, price:2, cls:0, foods:['bbq','home','hotpot'], scenes:['friends','family','outdoor'], kw:['黑莓果酱味','甘草和巧克力','特别浓郁']},
+ {n:'库纳瓦拉赤霞珠', c:'澳大利亚', r:'库纳瓦拉', t:'red', fam:'coonawarra', body:4.5, tannin:4.6, acid:4.2, sweet:0.8, fruit:4.2, oak:4.0, price:2, cls:0, foods:['home','bbq','cheese'], scenes:['family','gift','date'], kw:['黑加仑味','薄荷和桉树','有力量']},
+ {n:'猎人谷赛美蓉', c:'澳大利亚', r:'猎人谷', t:'white', fam:'hunter-sem', body:2.4, tannin:1, acid:5.0, sweet:0.4, fruit:2.2, oak:1.0, price:2, cls:0, foods:['seafood'], scenes:['family','afternoon','date'], kw:['青柠和柠檬草','一点蜡质感','低调的酸']},
+ {n:'玛格丽特河霞多丽', c:'澳大利亚', r:'玛格丽特河', t:'white', fam:'marg-chard', body:3.4, tannin:1, acid:4.4, sweet:0.6, fruit:3.8, oak:3.4, price:3, cls:0, foods:['seafood','home','cheese'], scenes:['family','date'], kw:['白桃味','腰果和柑橘','不偏不倚']},
+ {n:'纳帕赤霞珠', c:'美国', r:'纳帕谷', t:'red', fam:'napa-cab', body:5.0, tannin:4.6, acid:3.4, sweet:1.0, fruit:5.0, oak:5.0, price:4, cls:0, foods:['home','cheese','bbq'], scenes:['gift','family','date'], kw:['黑莓果酱味','香草和摩卡','饱满浓郁']},
+ {n:'俄勒冈黑皮诺', c:'美国', r:'威拉米特谷', t:'red', fam:'oregon-pinot', body:3.0, tannin:2.4, acid:4.2, sweet:0.4, fruit:4.2, oak:3.0, price:3, cls:0, foods:['home','seafood','cheese'], scenes:['date','family','afternoon'], kw:['红樱桃味','森林落叶的气息','轻盈优雅']},
+ {n:'加州过桶霞多丽', c:'美国', r:'加州', t:'white', fam:'cali-chard', body:4.0, tannin:1, acid:3.2, sweet:0.6, fruit:4.6, oak:5.0, price:3, cls:0, foods:['seafood','home','cheese'], scenes:['friends','family','date'], kw:['菠萝味','香草和奶油','味道很足']},
+ {n:'迈坡赤霞珠', c:'智利', r:'迈坡谷', t:'red', fam:'chile-cab', body:4.4, tannin:4.2, acid:4.0, sweet:1.0, fruit:4.8, oak:3.2, price:1, cls:0, foods:['home','bbq','hotpot'], scenes:['friends','outdoor','family'], kw:['黑醋栗味','薄荷和雪松','便宜又有料']},
+ {n:'卡萨布兰卡长相思', c:'智利', r:'卡萨布兰卡', t:'white', fam:'chile-sauv', body:2.0, tannin:1, acid:4.6, sweet:0.6, fruit:4.8, oak:0.5, price:1, cls:0, foods:['seafood','hotpot'], scenes:['outdoor','friends','afternoon'], kw:['青柠和百香果','一点草本味','清爽']},
+ {n:'智利黑皮诺', c:'智利', r:'卡萨布兰卡／比奥比奥', t:'red', fam:'chile-pinot', body:3.0, tannin:2.4, acid:4.0, sweet:0.6, fruit:4.4, oak:2.6, price:2, cls:0, foods:['home','seafood','hotpot'], scenes:['date','friends','family'], kw:['红樱桃和草莓','一点香料味','顺口不涩']},
+ {n:'门多萨马尔贝克', c:'阿根廷', r:'门多萨', t:'red', fam:'malbec', body:4.4, tannin:4.0, acid:3.6, sweet:1.0, fruit:5.0, oak:3.0, price:1, cls:0, foods:['bbq','home','hotpot'], scenes:['friends','outdoor','family'], kw:['黑李子味','紫罗兰和可可','饱满']},
+ {n:'门多萨托龙特斯', c:'阿根廷', r:'门多萨', t:'white', fam:'torrontes', body:2.4, tannin:1, acid:4.0, sweet:1.2, fruit:5.0, oak:0.5, price:1, cls:0, odd:1, foods:['hotpot','seafood'], scenes:['friends','outdoor','afternoon'], kw:['荔枝和玫瑰','香得很明显','微甜']},
+ {n:'斯泰伦博斯皮诺塔吉', c:'南非', r:'斯泰伦博斯', t:'red', fam:'pinotage', body:4.0, tannin:4.0, acid:4.0, sweet:1.0, fruit:4.2, oak:3.0, price:1, cls:0, foods:['bbq','home','cheese'], scenes:['family','friends'], kw:['黑莓味','烟熏和咖啡','有点泥土味']},
+ {n:'斯沃特兰白诗南', c:'南非', r:'斯沃特兰', t:'white', fam:'sa-chenin', body:3.0, tannin:1, acid:4.6, sweet:1.0, fruit:3.2, oak:1.6, price:1, cls:0, foods:['seafood','home','hotpot'], scenes:['family','afternoon','friends'], kw:['青苹果味','蜂蜡和柑橘','什么都能配']},
+ /* 其他 */
+ {n:'卡赫季陶罐橙酒', c:'格鲁吉亚', r:'卡赫季', t:'orange', fam:'orange', body:3.2, tannin:3.2, acid:4.0, sweet:0.6, fruit:3.0, oak:1.0, price:2, cls:0, odd:1, foods:['cheese','home'], scenes:['afternoon','date'], kw:['杏干和橘皮','茶叶味','有点涩的白酒']},
+ {n:'圣托里尼 Assyrtiko', c:'希腊', r:'圣托里尼', t:'white', fam:'assyrtiko', body:3.0, tannin:1, acid:5.0, sweet:0.4, fruit:2.4, oak:1.0, price:3, cls:0, odd:1, foods:['seafood'], scenes:['date','afternoon','family'], kw:['柠檬和海盐','火山石的味道','酸得锐利']},
+ {n:'杜罗河红混酿', c:'葡萄牙', r:'杜罗河', t:'red', fam:'douro', body:4.5, tannin:4.0, acid:4.0, sweet:1.0, fruit:4.0, oak:3.0, price:2, cls:1, foods:['home','bbq','cheese'], scenes:['family','gift','date'], kw:['黑莓味','紫罗兰和香料','浓郁']},
+ {n:'绿酒（微起泡白）', c:'葡萄牙', r:'米尼奥', t:'white', fam:'vinho-verde', body:1.6, tannin:1, acid:5.0, sweet:1.2, fruit:4.4, oak:0, price:1, cls:1, foods:['seafood','hotpot'], scenes:['outdoor','friends','afternoon'], kw:['青柠和白花','有一点点气泡','度数低']},
+ {n:'托卡伊甜白', c:'匈牙利', r:'托卡伊', t:'sweet', fam:'tokaji', body:4.0, tannin:1, acid:5.0, sweet:5.0, fruit:5.0, oak:2.0, price:3, cls:1, foods:['dessert','cheese'], scenes:['gift','afternoon','family'], kw:['杏脯和蜂蜜','柑橘','甜里带酸']},
+ {n:'波特酒', c:'葡萄牙', r:'杜罗河', t:'fortified', fam:'port', body:4.6, tannin:4.0, acid:3.6, sweet:4.4, fruit:5.0, oak:3.0, price:3, cls:1, odd:1, foods:['dessert','cheese'], scenes:['gift','afternoon'], kw:['黑莓果酱味','巧克力核桃','又甜又烈']},
+ {n:'莱昂丘甜白', c:'法国', r:'卢瓦尔', t:'sweet', fam:'coteaux-layon', body:3.6, tannin:1, acid:4.6, sweet:4.8, fruit:4.8, oak:1.5, price:3, cls:1, foods:['dessert','cheese'], scenes:['gift','date','afternoon'], kw:['杏子和蜂蜜','柑橘','甜而不腻']},
+ {n:'托斯卡纳圣酒', c:'意大利', r:'托斯卡纳', t:'sweet', fam:'vin-santo', body:4.0, tannin:1.5, acid:4.4, sweet:4.4, fruit:4.4, oak:3.0, price:3, cls:1, foods:['dessert','cheese'], scenes:['afternoon','gift','family'], kw:['焦糖和杏仁','橙皮','有陈年味']},
+ {n:'路斯格兰麝香加强酒', c:'澳大利亚', r:'路斯格兰', t:'sweet', fam:'rutherglen', body:4.4, tannin:2.0, acid:3.4, sweet:5.0, fruit:5.0, oak:3.0, price:3, cls:0, foods:['dessert','cheese'], scenes:['gift','afternoon'], kw:['葡萄干和太妃糖','无花果','浓郁甜']}
+];
+
+/* =====================================================================
+   无酒精饮品库：选了「0 酒精」或「18 岁以下」的人走这一条线
+   字段与酒款库同构（soft:1 标记），只是不含酒精、改用 tags/desc 直接写白话
+   ===================================================================== */
+var SOFT = [
+ {n:'现泡鲜果茶', r:'果茶', t:'soft-tea', fam:'fruit-tea', soft:1, body:2.0, tannin:1, acid:3.6, sweet:3.0, fruit:4.8, oak:0.5, price:1,
+  foods:['hotpot','home','bbq','seafood','dessert'], scenes:['outdoor','friends','afternoon','date'],
+  kw:['满杯新鲜水果','茶底清爽','酸甜自己调'],
+  tags:['果味很足','清爽微酸','甜度可调'],
+  desc:'一大杯新鲜水果泡在茶里，果味最足，凑到鼻子前一闻就很香。'},
+
+ {n:'港式丝袜奶茶（冻）', r:'奶茶', t:'soft-milk', fam:'milk-tea', soft:1, body:3.2, tannin:1.2, acid:1.4, sweet:3.4, fruit:1.2, oak:2.4, price:1,
+  foods:['home','bbq','cheese','dessert'], scenes:['afternoon','friends','family','outdoor'],
+  kw:['茶味很浓','奶味厚','微微回甘'],
+  tags:['茶味浓','奶香厚','甜度适中'],
+  desc:'茶味重、奶味厚的港式做法，甜度和冰量都能自己说，喝起来很顺。'},
+
+ {n:'鲜榨橙汁', r:'果汁', t:'soft-juice', fam:'orange-juice', soft:1, body:2.2, tannin:1, acid:4.4, sweet:3.6, fruit:4.6, oak:0, price:1,
+  foods:['home','bbq','seafood','dessert'], scenes:['afternoon','family','outdoor','friends'],
+  kw:['橙子味','酸得开胃','要冰的'],
+  tags:['酸味明显','果香很足','不加糖也甜'],
+  desc:'现榨的橙子，酸里带甜，配饭或者当下午的一杯都合适。'},
+
+ {n:'混合莓果昔', r:'果昔', t:'soft-juice', fam:'berry-smoothie', soft:1, body:3.4, tannin:1.2, acid:3.2, sweet:3.8, fruit:4.8, oak:0, price:2,
+  foods:['home','cheese','dessert'], scenes:['afternoon','date','friends'],
+  kw:['莓果味','稠稠的口感','像甜品'],
+  tags:['果味很足','口感厚实','是甜的'],
+  desc:'草莓、蓝莓这些打在一起，稠稠的一杯，喝起来跟甜品差不多。'},
+
+ {n:'无醇起泡酒（0.0%）', r:'起泡饮', t:'soft-spark', fam:'zero-spark', soft:1, body:2.4, tannin:1, acid:4.2, sweet:2.6, fruit:4.2, oak:0.5, price:2,
+  foods:['seafood','cheese','dessert'], scenes:['gift','date','friends','outdoor','family'],
+  kw:['气泡很细','青苹果和梨','开瓶有仪式感'],
+  tags:['带气泡','清爽微酸','不含酒精'],
+  desc:'跟起泡酒同一个路子，但不含酒精。开瓶有声音、举杯有样子，场面一点不尴尬。'},
+
+ {n:'气泡柠檬水', r:'气泡饮', t:'soft-spark', fam:'sparkling-lemon', soft:1, body:1.6, tannin:1, acid:4.8, sweet:1.4, fruit:2.8, oak:0, price:1,
+  foods:['hotpot','bbq','seafood','home'], scenes:['outdoor','friends','afternoon'],
+  kw:['柠檬味','气很足','专治油腻'],
+  tags:['酸味明显','完全不甜','带气泡'],
+  desc:'冰镇的气泡水挤点柠檬，气足、解腻，吃辣吃油的时候最舒服。'},
+
+ {n:'桂花酸梅汤', r:'中式饮', t:'soft-tea', fam:'suanmei', soft:1, body:2.0, tannin:1, acid:4.0, sweet:3.4, fruit:3.2, oak:0.5, price:1,
+  foods:['hotpot','bbq','home'], scenes:['family','friends','outdoor'],
+  kw:['乌梅和桂花','酸酸甜甜','冰镇最好喝'],
+  tags:['酸酸甜甜','解腻','老味道'],
+  desc:'乌梅熬出来的，带一点桂花香，火锅烧烤之后来一杯最舒服。'},
+
+ {n:'椰子水', r:'果汁', t:'soft-juice', fam:'coconut', soft:1, body:2.0, tannin:1, acid:2.2, sweet:3.0, fruit:3.0, oak:0, price:2,
+  foods:['seafood','home','hotpot'], scenes:['outdoor','afternoon','date'],
+  kw:['清甜','一点椰香','解渴'],
+  tags:['清甜','不酸','清爽'],
+  desc:'天然的清甜，带一点椰香，解渴又不腻。'},
+
+ {n:'热可可', r:'热饮', t:'soft-cocoa', fam:'cocoa', soft:1, body:3.8, tannin:1.2, acid:1.0, sweet:4.4, fruit:0.8, oak:2.0, price:1,
+  foods:['cheese','dessert'], scenes:['afternoon','family','date'],
+  kw:['巧克力味','奶香','热乎乎的'],
+  tags:['是甜的','口感厚实','暖和'],
+  desc:'热乎乎的一杯，巧克力味很足，配点心、看书、发呆都合适。'}
+];
+
+/* ===================== 场景对应的黄历吉祥话 ===================== */
+var ALMANAC = {
+  hotpot:{ yi:['吃辣不认输','出一身汗','直来直去','多喝两口','不管形象'], ji:['装斯文','小口抿'],
+           say:'吃火锅的时候，这瓶能压住辣，果味反而更清楚' },
+  home:{ yi:['多盛一碗饭','慢慢吃','和家人说话','不着急'], ji:['看手机','凑合一顿'],
+         say:'家常菜配它不抢味，吃饭的时候顺手就能喝' },
+  bbq:{ yi:['大口吃肉','痛快','碰杯','热闹起来'], ji:['算热量','扫兴'],
+        say:'烧烤卤味的油和咸，正好被它撑住' },
+  seafood:{ yi:['吃新鲜的','清清爽爽','慢慢剥壳','喝点凉的'], ji:['重口味','油腻'],
+            say:'清蒸白灼最怕酒把鲜味压住，它不会' },
+  cheese:{ yi:['切一块慢慢嚼','配点水果','说点闲话'], ji:['赶时间'],
+           say:'奶酪和它一起吃，两个味道都会变得更好' },
+  dessert:{ yi:['吃甜的','开心','理直气壮','再来一块'], ji:['算糖分','克制'],
+            say:'甜点配它，甜味更有层次，不会越吃越腻' },
+  outdoor:{ yi:['吹风','无所事事','看天','把鞋脱了'], ji:['赶时间','看工作群'],
+            say:'露营野餐不方便讲究，这瓶不挑温度，开盖就能喝' },
+  afternoon:{ yi:['发呆','慢一点','和自己待着','放空'], ji:['刷手机','想工作'],
+              say:'一个人喝不用讲排场，它不吵不闹，慢慢喝正好' },
+  friends:{ yi:['说废话','笑到打嗝','续杯','不聊正事'], ji:['聊工作','劝酒'],
+            say:'朋友小酌要的是好入口、能聊下去，这瓶不会让人拘着' },
+  family:{ yi:['热闹','多夹一筷子','听长辈说话','团圆'], ji:['提成绩','翻旧账'],
+           say:'一桌人吃饭口味杂，它是最不容易出错的那种' },
+  gift:{ yi:['体面','把话说漂亮','郑重其事','留个好印象'], ji:['说价钱','太随意'],
+         say:'送人或者正式饭局，这个产区的名字一看就知道你有心' },
+  date:{ yi:['看对方眼睛','慢一点喝','说真话','坐近一点'], ji:['玩手机','灌酒'],
+         say:'两个人的时候，它不冲，慢慢喝能把话聊开' }
+};
+
+/* ===================== 逻辑 ===================== */
+var answers = [];
+var NQ = QUESTIONS.length;       // 题目总数
+var STEP_PICK = NQ + 1;          // 三选一
+var STEP_RESULT = NQ + 2;        // 选定结果
+var step = 0;                    // 0 首页 / 1..NQ 题目 / STEP_PICK 三选一 / STEP_RESULT 结果
+var selected = 0;                // 用户在三选一里点中的那一杯
+var lockUntil = 0;               // 每次渲染后的短暂"防误触"窗口
+var view = document.getElementById('view');
+var bar  = document.getElementById('bar');
+var ovlBox = document.getElementById('overlay');   // 结果浮层的容器（静态 HTML 里）
+var TODAY = new Date();
+
+var DIMS = [['body',14],['tannin',12],['acid',11],['sweet',12],['fruit',9],['oak',7]];
+var DIM_MAX = DIMS.reduce(function(a,d){ return a + d[1]; }, 0);
+var TOTAL_MAX = 100 + 28 + 12 + 16 + 14;   // 170
+
+function buildProfile(){
+  var u = {body:3, tannin:3, acid:3, sweet:1, fruit:3, oak:2,
+           price:2, scene:'friends', food:'none', type:'any', types:[],
+           abv:'mid', age:'adult', stype:'any', stypes:[]};
+  var acc = {}, cnt = {};
+  var typeVals = [], stypeVals = [];
+  answers.forEach(function(ai, qi){
+    var q = QUESTIONS[qi];
+    if(!q) return;
+    // 多选题存的是下标数组，单选题存的是单个下标
+    var list = Array.isArray(ai) ? ai : [ai];
+    // 注意：第 2 题选了「0 酒精」时，类型题展示的是饮品版本的那一组选项，
+    // 下标必须对着「实际看到的那一组」去取，不能一律读 q.opts，否则会取成牛头不对马嘴的选项。
+    var pool = shownOpts(qi);
+    list.forEach(function(k){
+      var o = pool[k];
+      if(!o) return;
+      Object.keys(o.fx).forEach(function(key){
+        var v = o.fx[key];
+        if(key === 'type'){ typeVals.push(v); }
+        else if(key === 'stype'){ stypeVals.push(v); }
+        else if(key === 'scene' || key === 'food' || key === 'price'
+                || key === 'abv' || key === 'age'){ u[key] = v; }
+        else { acc[key] = (acc[key] || 0) + v; cnt[key] = (cnt[key] || 0) + 1; }
+      });
+    });
+  });
+  Object.keys(acc).forEach(function(k){ u[k] = acc[k] / cnt[k]; });
+
+  // 类型题可以多选：取并集。点了「都行」、或者一个都没点，就是不设限。
+  u.types = uniq(typeVals);
+  if(u.types.indexOf('any') >= 0) u.types = [];
+  u.type = u.types.length === 0 ? 'any' : (u.types.length === 1 ? u.types[0] : 'multi');
+
+  u.stypes = uniq(stypeVals);
+  if(u.stypes.indexOf('any') >= 0) u.stypes = [];
+  u.stype = u.stypes.length === 0 ? 'any' : (u.stypes.length === 1 ? u.stypes[0] : 'multi');
+
+  // 最后那道类型题是最明确的一次表态，跟前面的口味冲突时以它为准
+  if(u.types.indexOf('sweet') >= 0) u.sweet = Math.max(u.sweet, 3.8);
+  return u;
+}
+// 去重，不改原数组
+function uniq(arr){
+  var out = [];
+  arr.forEach(function(x){ if(out.indexOf(x) < 0) out.push(x); });
+  return out;
+}
+
+// 走无酒精线：明确说 0 酒精，或者未满 18 岁
+function isSoft(u){ return u.abv === 'none' || u.age === 'minor'; }
+
+// 按 id 找题号（题目顺序会调整，所以不写死下标）
+function qIndex(id){
+  for(var i = 0; i < QUESTIONS.length; i++){ if(QUESTIONS[i].id === id) return i; }
+  return -1;
+}
+// 酒精度那一题选了什么；还没答过返回 null
+function abvChoice(){
+  var i = qIndex('abv');
+  if(i < 0 || answers[i] == null) return null;
+  var o = QUESTIONS[i].opts[answers[i]];
+  return o ? (o.fx.abv || null) : null;
+}
+// 这一题实际展示的选项（选了 0 酒精时，「想喝哪一种」会整组换成饮品版本）
+function shownOpts(qi){
+  var q = QUESTIONS[qi];
+  if(!q) return [];
+  if(q.soft && abvChoice() === 'none') return q.soft.opts;
+  return q.opts;
+}
+// 这个选项是不是「都行，你帮我定」
+function isAnyOpt(qi, idx){
+  var o = shownOpts(qi)[idx];
+  return !!(o && o.fx && (o.fx.type === 'any' || o.fx.stype === 'any'));
+}
+// 多选题确认按钮的文案
+function multiLabel(n){
+  return n === 0 ? '都不挑，你帮我定 →' : ('就选这些（已选 ' + n + ' 项）→');
+}
+
+// 一个类型是否算命中这瓶酒（想喝甜的，用加强型甜酒兜底也算）
+function typeHit(t, w){
+  return t === w.t || (t === 'sweet' && w.t === 'fortified' && w.sweet >= 3);
+}
+
+function scoreWine(w, u){
+  var s = 0;
+  DIMS.forEach(function(d){
+    s += d[1] * Math.max(0, (5 - Math.abs(u[d[0]] - w[d[0]])) / 5);
+  });
+  s = s / DIM_MAX * 100;
+
+  // 种类：权重最高，决定推荐范围。多选时命中任意一个就算命中。
+  if(u.types.length){
+    var ok = u.types.some(function(t){ return typeHit(t, w); });
+    s += ok ? 28 : -34;
+  }
+  // 预算：按"能接受的上限"处理，超了才罚
+  s += (w.price <= u.price) ? 12 : -7 * (w.price - u.price);
+  // 场合与吃什么：这两项是本次测评的重点
+  s += (w.scenes.indexOf(u.scene) >= 0) ? 16 : -4;
+  if(u.food !== 'none'){
+    if(w.foods.indexOf(u.food) >= 0) s += 14;
+    // 配甜点时，干红是最差的组合，罚得比其他不匹配更重
+    else s += (u.food === 'dessert') ? -18 : -5;
+  }
+  // 类型不设限时，小众品类不做默认推荐
+  if(!u.types.length && w.odd) s -= 10;
+  // 酒精度偏好：没有具体度数数据，用"劲道"（酒体＋单宁，加强酒再抬一档）粗略代理
+  if(u.abv === 'low' || u.abv === 'high'){
+    var heft = (w.body + w.tannin) / 2 + (w.t === 'fortified' ? 2 : 0);
+    var want = (u.abv === 'high') ? 4.4 : 2.2;
+    s += Math.max(-6, 6 - Math.abs(heft - want) * 3);
+  }
+  return s;
+}
+
+/* ---------- 无酒精线：甜度／酸度／果香／清爽度才是重点 ---------- */
+var SDIMS = [['body',18],['acid',20],['sweet',30],['fruit',26]];
+var SDIM_MAX = SDIMS.reduce(function(a,d){ return a + d[1]; }, 0);
+
+function scoreSoft(w, u){
+  var s = 0;
+  SDIMS.forEach(function(d){
+    s += d[1] * Math.max(0, (5 - Math.abs(u[d[0]] - w[d[0]])) / 5);
+  });
+  s = s / SDIM_MAX * 100;
+  // 成人但走了不含酒精线时，「想喝哪一种」问的还是酒的类型，给一点呼应，不硬拗
+  if(u.types.indexOf('spark') >= 0 && w.t === 'soft-spark') s += 10;
+  if(u.types.indexOf('sweet') >= 0 && w.sweet >= 3.5) s += 10;
+  // 明确说了 0 酒精时，「想喝哪一种」问的是饮品，用它来收口（多选时命中任意一类即可）
+  if(u.stypes.length){
+    var map = {tea:['soft-tea','soft-milk'], juice:['soft-juice'],
+               spark:['soft-spark'], cocoa:['soft-cocoa']};
+    var hit = u.stypes.some(function(t){ return (map[t] || []).indexOf(w.t) >= 0; });
+    s += hit ? 16 : -8;
+  }
+  s += (w.price <= u.price) ? 12 : -7 * (w.price - u.price);
+  s += (w.scenes.indexOf(u.scene) >= 0) ? 16 : -4;
+  if(u.food !== 'none'){
+    if(w.foods.indexOf(u.food) >= 0) s += 14;
+    else s += -6;
+  }
+  return s;
+}
+
+function rank(u){
+  var pool = isSoft(u) ? SOFT : WINES;
+  return pool.map(function(w){ return {w:w, s: w.soft ? scoreSoft(w, u) : scoreWine(w, u)}; })
+             .sort(function(a,b){ return b.s - a.s; });
+}
+
+function pickTop(ranked, u){
+  var out = [];
+  // 多选时先给每种选中的类型各留一个名额：不然选了「红＋甜」会得到三瓶红酒，
+  // 跟「给你挑了三个方向」这句话对不上。
+  if(u && u.types && u.types.length > 1){
+    u.types.forEach(function(t){
+      if(out.length >= 3) return;
+      for(var pi = 0; pi < ranked.length; pi++){
+        var x = ranked[pi];
+        if(out.indexOf(x) >= 0 || !typeHit(t, x.w)) continue;
+        if(out.some(function(y){ return y.w.fam === x.w.fam; })) continue;
+        out.push(x);
+        break;
+      }
+    });
+  }
+  for(var i = 0; i < ranked.length && out.length < 3; i++){
+    if(out.length === 0){ out.push(ranked[i]); continue; }
+    if(!out.some(function(x){ return x.w.fam === ranked[i].w.fam; })) out.push(ranked[i]);
+  }
+  for(var j = 0; j < ranked.length && out.length < 3; j++){
+    if(out.indexOf(ranked[j]) < 0) out.push(ranked[j]);
+  }
+  return out;
+}
+
+/* ---------- 把酒的属性翻译成大白话 ---------- */
+function plainTags(w){
+  if(w.soft) return w.tags.slice();   // 无酒精饮品直接给写好的白话标签
+  var t = [];
+  t.push(w.body <= 2.4 ? '入口很轻' : (w.body <= 3.8 ? '不轻不重' : '口感厚实'));
+  t.push(w.tannin <= 2.0 ? '一点不涩' : (w.tannin <= 3.8 ? '有一点点涩' : '涩感明显'));
+  t.push(w.acid <= 3.0 ? '不酸' : (w.acid <= 4.2 ? '清爽微酸' : '酸味明显'));
+  t.push(w.sweet <= 0.9 ? '完全不甜' : (w.sweet <= 3.0 ? '微微有点甜' : '是甜的'));
+  if(w.fruit >= 4.2) t.push('果香很足');
+  else if(w.oak >= 4.0) t.push('有奶油烤香');
+  else if(w.fruit <= 2.5) t.push('香味含蓄');
+  return t;
+}
+
+function tasteText(w){
+  if(w.soft) return w.desc;
+  var a = [];
+  a.push(w.body <= 2.4 ? '喝起来很轻，不压舌头'
+       : (w.body <= 3.8 ? '口感不轻不重，正好' : '口感很足，喝一口能感觉到分量'));
+  if(w.tannin <= 2.0) a.push('一点都不涩');
+  else if(w.tannin >= 4.0) a.push('涩感比较明显，喝完嘴巴会有点发紧');
+  else a.push('有一点点涩，但不碍事');
+  if(w.acid >= 4.3) a.push('酸酸的，很清爽');
+  else if(w.acid <= 2.8) a.push('不怎么酸，很柔和');
+  if(w.sweet >= 3.5) a.push('是甜的');
+  else if(w.sweet <= 0.9) a.push('不甜');
+  else a.push('带一点微甜');
+  if(w.fruit >= 4.2) a.push('闻起来果味很冲，像把水果凑到鼻子前');
+  else if(w.oak >= 4.0) a.push('有奶油、烤面包、香草那种香味');
+  else if(w.fruit <= 2.5) a.push('香味含蓄，像花香、香料，还有雨后石头的味道');
+  else a.push('香味不浓不淡，果味和别的味道混在一起');
+  return a.join('，') + '。';
+}
+
+function whyLines(w, u){
+  if(w.soft) return whyLinesSoft(w, u);
+  var out = [];
+  var al = ALMANAC[u.scene] || ALMANAC.friends;
+  out.push(al.say + '。');
+
+  if(u.food === 'none'){
+    out.push('不配吃的更好，这瓶单喝就有味道。');
+  } else if(w.foods.indexOf(u.food) >= 0){
+    out.push('它跟你要配的' + foodName(u.food) + '是一路的，不会互相打架。');
+  }
+
+  if(u.tannin <= 2.2 && w.tannin <= 2.2) out.push('你说了怕涩，它正好不涩。');
+  else if(u.tannin >= 4.0 && w.tannin >= 4.0) out.push('你能接受那股涩劲，它给得起。');
+  if(u.acid <= 2.3 && w.acid <= 3.2) out.push('你说不喜欢酸，它不酸。');
+  else if(u.acid >= 4.3 && w.acid >= 4.3) out.push('你要的酸爽它有。');
+  if(u.sweet >= 3.5 && w.sweet >= 3.5) out.push('你想喝甜的，它就是甜的。');
+  else if(u.sweet <= 0.9 && w.sweet <= 0.9) out.push('你不吃甜，它是完全不甜的。');
+  if(u.body >= 4.2 && w.body >= 4.3) out.push('你要有味道、有分量的，它够。');
+  else if(u.body <= 2.3 && w.body <= 2.4) out.push('你要轻的，它入口几乎没有负担。');
+
+  return out.slice(0, 4);
+}
+
+/* ---------- 无酒精线的推荐理由（场合话术里不能出现"产区""这瓶酒"） ---------- */
+function whyLinesSoft(w, u){
+  var sceneSay = {
+    hotpot:'吃火锅的时候，它解腻又降火，比冰可乐舒服。',
+    home:'家常菜配它不抢味，吃饭的时候随手就能来一杯。',
+    bbq:'烧烤卤味油和咸都重，它正好冲得开。',
+    seafood:'清蒸白灼配它，不会把鲜味压住。',
+    cheese:'配奶酪火腿这类，两个味道会互相抬一把。',
+    dessert:'配甜点正好，甜的配甜的，越吃越顺。',
+    outdoor:'露营野餐不方便讲究，它不挑温度，开盖就能喝。',
+    afternoon:'一个人待着的时候，它不吵不闹，慢慢喝正好。',
+    friends:'朋友聚会要的是好入口、能聊下去，它不会让人拘着。',
+    family:'一家人吃饭口味杂，它是最不容易出错的那种。',
+    gift:'送人或者正式场合，不含酒精反而更稳妥，谁都能喝。',
+    date:'两个人的时候，它不冲，慢慢聊正好。'
+  };
+  var out = [];
+  out.push(sceneSay[u.scene] || '按你选的场合，它是最不容易出错的那一杯。');
+  if(u.food !== 'none' && w.foods.indexOf(u.food) >= 0){
+    out.push('它跟你要配的' + foodName(u.food) + '是一路的，不会互相打架。');
+  }
+  if(u.acid <= 2.3 && w.acid <= 3.2) out.push('你说不喜欢酸的，它不酸。');
+  else if(u.acid >= 4.3 && w.acid >= 4.0) out.push('你要的酸爽它有。');
+  if(u.sweet >= 3.5 && w.sweet >= 3.4) out.push('你想喝甜的，它就是甜的。');
+  else if(u.sweet <= 0.9 && w.sweet <= 2.0) out.push('你不吃甜，它几乎不甜。');
+  if(u.fruit >= 4.2 && w.fruit >= 4.2) out.push('你喜欢果味，它的果香很足。');
+  if(u.age === 'minor') out.push('这一杯不含酒精，放心喝。');
+  else if(u.abv === 'none') out.push('0 酒精，开车或者不能碰酒的场合都能放心。');
+  return out.slice(0, 4);
+}
+
+function foodName(f){
+  return {hotpot:'火锅川菜', home:'家常菜', bbq:'烧烤卤味', seafood:'海鲜清蒸',
+          cheese:'奶酪火腿', dessert:'甜点水果'}[f] || '这次要吃的';
+}
+function typeName(t){
+  return {red:'红葡萄酒', white:'白葡萄酒', spark:'带气泡的', rose:'桃红',
+          sweet:'甜酒', fortified:'加强酒', orange:'橙酒',
+          'soft-tea':'茶饮', 'soft-milk':'奶茶', 'soft-juice':'果汁',
+          'soft-spark':'无醇气泡', 'soft-cocoa':'热饮'}[t] || t;
+}
+// 产区名里已经含了国名时就不再重复（否则会写成"法国 · 法国南部"）
+function regionText(w){
+  return (w.r.indexOf(w.c) === 0) ? w.r : (w.c + ' · ' + w.r);
+}
+// 卡片／结果页统一的一行副标题
+function metaText(w){
+  return w.soft ? (w.r + ' · 不含酒精') : (regionText(w) + ' · ' + typeName(w.t));
+}
+function avoidLines(u){
+  var t = [];
+  if(u.tannin <= 2.2) t.push('你怕涩，巴罗洛、赤霞珠为主的波尔多左岸、杜埃罗河岸这几类先别碰，它们又涩又有劲。');
+  if(u.acid <= 2.3) t.push('你不喜欢酸，夏布利、桑塞尔、阿尔萨斯雷司令这类酸度高的先放一放。');
+  if(u.sweet <= 0.9) t.push('你不吃甜，苏玳、托卡伊、波特、阿玛罗尼这几类明显带甜的可以直接跳过。');
+  if(u.sweet >= 3.5) t.push('你要甜的，普通干红干白喝着会觉得又涩又苦。');
+  if(u.body <= 2.3) t.push('你喜欢轻的，阿玛罗尼、巴罗萨西拉这类度数高又厚重的会压味。');
+  if(u.body >= 4.3) t.push('你要有分量的，桃红和博若莱这类会觉得像喝水。');
+  if(t.length === 0) t.push('你的口味挺居中，没什么明显的雷区，放心多试几款。');
+  return t.slice(0, 3);
+}
+
+/* ---------- 无酒精线的避雷提示 ---------- */
+function avoidLinesSoft(u){
+  var t = [];
+  if(u.acid <= 2.3) t.push('你不喜欢酸的，纯柠檬水、鲜榨橙汁这类偏酸的可以先放着。');
+  if(u.sweet <= 0.9) t.push('你不吃甜，奶茶、热可可这类明显带甜的可以跳过。');
+  if(u.sweet >= 3.5) t.push('你要甜的，气泡水和酸梅汤这种不甜的会觉得没意思。');
+  if(u.body <= 2.3) t.push('你喜欢清爽的，果昔、热可可这类偏厚的会觉得腻。');
+  if(u.body >= 4.3) t.push('你想要有口感的，纯气泡水这类太轻，喝着没劲。');
+  if(t.length === 0) t.push('你口味居中，这几类都能喝，按当天心情挑就行。');
+  return t.slice(0, 3);
+}
+
+/* ---------- 黄历：同一天同一场景结果固定 ---------- */
+function seededPick(arr, seed, n){
+  var pool = arr.slice(), out = [], s = seed;
+  for(var i = 0; i < n && pool.length; i++){
+    s = (s * 9301 + 49297) % 233280;
+    out.push(pool.splice(Math.floor(s / 233280 * pool.length), 1)[0]);
+  }
+  return out;
+}
+function almanacFor(scene){
+  var a = ALMANAC[scene] || ALMANAC.friends;
+  var seed = TODAY.getFullYear() * 10000 + (TODAY.getMonth() + 1) * 100 + TODAY.getDate();
+  for(var i = 0; i < scene.length; i++) seed += scene.charCodeAt(i);
+  return {yi: seededPick(a.yi, seed, 3), ji: a.ji, say: a.say};
+}
+
+function dateBlockHTML(){
+  var l = solarToLunar(TODAY);
+  var gz = ganzhiYear(l.year);
+  var sx = SX[((l.year - 4) % 12 + 12) % 12];
+  var md = (l.isLeap ? '闰' : '') + LM[l.month - 1] + '月' + lunarDayName(l.day);
+  return ''
+    + '<div class="almanac">'
+    +   '<div class="al-date serif">' + TODAY.getFullYear() + ' 年 ' + (TODAY.getMonth() + 1) + ' 月 ' + TODAY.getDate() + ' 日</div>'
+    +   '<div class="al-week">' + WK[TODAY.getDay()] + '</div>'
+    +   '<div class="al-lunar">农历 ' + md + ' <span>· ' + gz + '年 · 属' + sx + '</span></div>'
+    +   '<div class="yiji" id="yiji"></div>'
+    + '</div>';
+}
+function yijiHTML(scene){
+  var al = almanacFor(scene);
+  return ''
+    + '<div class="yi-row"><div class="stamp">宜</div><div class="yi-text"><em>' + al.yi.join(' · ') + '</em></div></div>'
+    + '<div class="yi-row"><div class="stamp gray">忌</div><div class="ji-text">' + al.ji.join(' · ') + '</div></div>';
+}
+
+/* 红卡右下角的两个二维码：左边是测评链接，右边是我自己的公众号。
+   任一缺数据（比如本地 file:// 打开时没有可分享链接）就少画一个，两个都没有就整行不出现 */
+function qrRowHTML(){
+  var a = hasQR()   ? '<div class="qrtile" data-noclose="1"><img src="' + QR_DATA + '" alt="扫码来测"><span>扫码来测</span></div>' : '';
+  var b = hasMyQR() ? '<div class="qrtile" data-noclose="1"><img src="' + MY_QR   + '" alt="扫码关注"><span>扫码关注</span></div>' : '';
+  if(!a && !b) return '';
+  return '<div class="qrrow">' + a + b + '</div>';
+}
+
+/* ---------- 结果浮层的内容（点中某一张推荐后"浮"上来） ---------- */
+function resultHTML(){
+  var u = buildProfile();
+  var soft = isSoft(u);
+  var top3 = pickTop(rank(u), u);
+  var w0 = top3[selected] ? top3[selected].w : top3[0].w;
+  var whys = whyLines(w0, u);
+  var avoids = soft ? avoidLinesSoft(u) : avoidLines(u);
+  var cup = soft ? '杯' : '瓶';
+
+  var html = dateBlockHTML()
+    + '<div class="hero' + (soft ? ' soft' : '') + '">'
+    +   '<div class="flag">今天配你的这一' + cup + '</div>'
+    +   '<h2 class="serif">' + w0.n + '</h2>'
+    +   '<div class="meta">' + metaText(w0) + '</div>'
+    +   '<div class="tagrow">';
+  plainTags(w0).forEach(function(t){ html += '<span class="tag">' + t + '</span>'; });
+  html += '</div>'
+    +   '<div class="taste"><span class="lbl">喝起来是什么感觉</span>' + tasteText(w0) + '</div>'
+    +   '<ul class="why">';
+  whys.forEach(function(x){ html += '<li>' + x + '</li>'; });
+  html += '</ul>'
+    +   '<div class="taste" style="margin-top:20px"><span class="lbl">它具体的味道</span>' + w0.kw.join('，') + '。</div>'
+    +   qrRowHTML()
+    + '</div>';
+
+  // 「尽量不要选这些」紧跟主推卡：看完推荐，这是最该先知道的一条判断
+  html += '<div class="block"><h3>' + (soft ? '这几类先别急着点' : '尽量不要选这些') + '</h3><div class="warn"><ul>';
+  avoids.forEach(function(x){ html += '<li>' + x + '</li>'; });
+  html += '</ul></div></div>';
+
+  html += '<div class="footer">'
+    + (soft
+        ? '这一条线给到的都是不含酒精的饮品，不涉及品牌与具体产品；未满 18 岁请勿饮酒。'
+        : '本测评只给到「产区 + 风格」这一层，不涉及酒庄、年份与具体酒款。同一个产区里价格差别可能很大，预算只是风格档位上的匹配，不代表某一瓶的具体价钱。')
+    + '</div>';
+
+  html += '<div class="ovl-hint">轻点卡片<b>回到三个推荐</b> · 长按卡片<b>把这瓶存成图片</b></div>';
+  return html;
+}
+
+/* ===================== 渲染 ===================== */
+function render(){
+  var html = '';
+  // 选定结果之后，"三个推荐"那一页仍然留在底下，结果作为浮层盖在上面。
+  // 所以这里单独算一个 vis：表示"底下那一页显示到哪一步"。
+  var isResult = (step === STEP_RESULT);
+  var vis = isResult ? STEP_PICK : step;
+
+  bar.style.width = (isResult ? 100
+    : (vis === 0 ? 0 : Math.min(100, vis / (NQ + 1) * 100))) + '%';
+
+  if(vis === 0){
+    html = ''
+      + '<div class="fade">'
+      + '<h1 class="serif">不懂酒没关系，<br><em>来测测你就知道</em></h1>'
+      + '<button class="go" id="start">开始</button>'
+      + '</div>';
+  } else if(vis >= 1 && vis <= NQ){
+    var qi = vis - 1;
+    var q = QUESTIONS[qi];
+    // 前面已经明确说了"0 酒精"，就把带软饮变体的那一题换掉
+    var shown = (q.soft && abvChoice() === 'none') ? q.soft : q;
+    var opts = shownOpts(qi);
+    var multi = !!q.multi;
+    var picked = multi ? (Array.isArray(answers[qi]) ? answers[qi] : []) : [];
+    html = '<div class="fade">'
+      + '<div class="qnum">第 <b>' + step + '</b> / ' + NQ + ' 题</div>'
+      + '<div class="qtitle serif">' + shown.t + '</div>'
+      + (shown.h ? '<div class="qhint">' + shown.h + '</div>' : '')
+      + (multi ? '<div class="qhint multi">'
+          + (q.mh || '可以多选。想要两三种都点上；一个都不点，就是让我帮你定。') + '</div>' : '')
+      + '<div class="opts' + (multi ? ' multi' : '') + '">';
+    opts.forEach(function(o, i){
+      html += '<div class="opt' + (picked.indexOf(i) >= 0 ? ' sel' : '') + '" data-i="' + i + '">'
+            +   '<div class="dot"></div>'
+            +   '<div><div class="olabel">' + o.l + '</div>'
+            +   (o.d ? '<div class="odesc">' + o.d + '</div>' : '')
+            +   '</div></div>';
+    });
+    html += '</div>';
+    if(multi){
+      html += '<div class="multibar"><button class="go" id="mnext">'
+            +   multiLabel(picked.length) + '</button></div>';
+    }
+    html += (step > 1 ? '<div class="back" id="back">← 上一题</div>' : '')
+      + '</div>';
+  } else if(vis === STEP_PICK){
+    var pu = buildProfile();
+    var softLine = isSoft(pu);
+    var picks = pickTop(rank(pu), pu);
+    html = '<div class="fade">'
+      + '<div class="rhead serif">给你挑了三个方向</div>'
+      + '<p class="picknote">' + (softLine
+          ? '这三个都不含酒精，也都配得上你这次的场合。点一下你最想喝的那杯，看看今天的宜忌。'
+          : '三个都配得上你这次的场合。点一下你最想开的那瓶，看看今天的宜忌。') + '</p>';
+    picks.forEach(function(x, i){
+      var w = x.w;
+      html += '<div class="card' + (i === 0 ? ' best' : '') + '" data-pick="' + i + '">'
+            +   (i === 0 ? '<span class="badge">最贴合你的</span>' : '')
+            +   '<h3 class="serif">' + w.n + '</h3>'
+            +   '<div class="meta">' + metaText(w) + '</div>'
+            +   '<div class="tagrow">';
+      plainTags(w).forEach(function(t){ html += '<span class="tag">' + t + '</span>'; });
+      html += '</div>'
+            +   '<div class="desc">' + tasteText(w) + '</div>'
+            +   '<div class="kw">典型味道：' + w.kw.join('，') + '。</div>'
+            +   '<div class="wholine">' + whyLines(w, pu).slice(0, 2).join('') + '</div>'
+            +   '<div class="pick">' + (softLine ? '就选这一杯 →' : '就选这一瓶 →') + '</div>'
+            + '</div>';
+    });
+    html += '<div class="again"><button class="ghost" id="again">再测一次</button></div>'
+          + '<div class="backwrap"><span class="back" id="back">← 想改前面的答案</span></div>'
+      + '</div>';
+  }
+
+  view.innerHTML = html;
+
+  // ---- 结果浮层：盖在"三个推荐"上面，底下那一页保持原样 ----
+  if(isResult){
+    ovlBox.innerHTML = '<div class="ovl-bg"></div>'
+      + '<div class="ovl-panel">' + resultHTML() + '</div>';
+    ovlBox.className = 'ovl on';
+  } else {
+    ovlBox.className = 'ovl';
+    ovlBox.innerHTML = '';
+  }
+
+  // 渲染完成后的短暂防误触窗口：手机上"点击穿透"/连点会让下一下落到新页面的按钮上
+  lockUntil = Date.now() + 280;
+
+  var yj = document.getElementById('yiji');
+  if(yj) yj.innerHTML = yijiHTML(buildProfile().scene);
+
+  var el0 = view.querySelector('.fade');
+  if(el0){
+    // 先把刚插进来的元素按初始态算一次样式（opacity:0 / 位移），再挂上 in，
+    // 过渡才有起点。
+    // 这里故意不用 requestAnimationFrame：无头浏览器、切到后台的标签页会节流甚至
+    // 完全不触发 rAF，一旦不触发，整页会永远停在 opacity:0 上，等于白屏。
+    void el0.offsetHeight;
+    el0.classList.add('in');
+  }
+  bind();
+  // 浮层是固定定位、不随页面滚动，所以选定结果时不需要回到顶部；
+  // 只有普通翻页才滚回顶部。平滑滚动会在浮层升起时抢视线，也是不加它的原因。
+  if(!isResult) window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ===================== 分享链接与二维码 ===================== */
+// 部署上线后会把真实二维码（PNG 的 data URI）和站点地址填进下面两个占位符。
+// 未填时全流程自动降级：页面不出现分享区、分享图里不画二维码，其它功能不受影响。
+var QR_DATA   = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAFICAAAAAAXfzjvAAAD3klEQVR42u3dSYpkMQwFQKmp+19ZvS9Ivi3Lv3IRb1tjBhYIj1khE/mHACRIkAISJEiQAhIkSAEJEiRIAQkSJEgBCRKkgAQJEqSABAkSpID8lvw8fUM2f/Hqvstc/Lmp/+PW5zEilTZIkAISJEh95Gxf+NQv1q+v51Bf+Pv31vDnMSKVNkiQAhIkSH3kXnKzz8xm//fp+3b7zBr+PEak0gYJUkCCBCm9PnIqn+YLd+cPP/18tx80IpU2SAEJEiRI+a4+Mhe/Xpv9YT30p0ak0gYpIEGCFJDf0Ud25/dqcZ07N+cbV/vL6c9jRCptkCAFJEiQ+sgYPW8SzXnK1XnIqXXyNCKVNkgBCRIkSDlq4+ql9ezb+xv/al+kEQkSJEgBCRKkPrLX58XmuetqnpvOofPXeWm924hU2iBBCkiQIPWRZ/1fXV7nXv27uz+X7iFX2iAFJEiQIOXKuvZuf1ebfdtuv9e9r7IurasbkUobJEgBCRKkPnKmn+zOG06/k1iH54f0kUobJEgBCRKknK1rx+a+w7rUr039nRy+B8iIVNogQQpIkCD1kXfPY3f3KU69u3irzzUilTZIkAISJEh95N33tnf70BjeBxmXzg0ZkUobJEgBCRJkuId8dB/i037K2jxXk0Pnr6P5nrcRqbRBghSQIEHK2fvatfiOYR3eBzn9Ts3u+nla11baIEEKSJAgJSbXtafWifPwXHYdvq9Yh/cMGZFKGyRIAQkSpD5y5t3CHLoP8nT+sZp9sP2RShukgAQJEqTcvfdn+j7v032O3f/Lu4hKG6SABAkSpMTV/ZHdczRPfVsO3+uYh/2k/ZFKG6SABAkSpMz2kdncj9hd3+7Ob9al97WNSKUNEqSABAlSzuYj8+Vz1Nn8ei3e65Puj1TaIAUkSJAg5ZV7f6bWn2v43e5snrOO5rymEam0QYIUkCBB6iNn8jSPV4fzft117oyz80PmI5U2SJACEiRIufMuYrx8jma3r8yhc0LmI5U2SJACEiRIiSvvIn7qC7vvFHbPT9fiPGQNv/ttRCptkCAFJEiQ+siZe3e6fdvqeew4fP9md/3bfKTSBglSQIIEKWf7I3O4z+y+i1Ob58nz0vkaI1JpgwQpIEGC1EfGn+yTrM35zBp+pyaH5lONSKUNEqSABAlSH/lOPxmH9zXWpXPi6V1EpQ1SQIIECVKu3h8ZQ/N/p+ddTt/hTiNSaYMUkCBBgpRX3kWM4XslT9/Ric33c7r3ARmRShskSAEJEqS8e3+kESkgQYIUkCBBghSQIEGCFJAgQQpIkCBBCkiQIEEKSJAgBSRIkCAF5Mv5D+bKBKfWQmXhAAAAAElFTkSuQmCC";
+var MY_QR     = "data:image/jpeg;base64,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";   // 我的公众号二维码（data:image/jpeg;base64,…），由发布脚本回填；留空则红卡右下角少一枚
+var SITE_BASE = "https://zhaolynn007.github.io/what-to-drink-today/";;
+var SHARE_URL = (typeof location !== 'undefined' && location && /^https?:$/.test(location.protocol))
+  ? (location.origin + location.pathname) : '';
+
+function hasQR(){ return QR_DATA.indexOf('data:image') === 0; }
+function hasMyQR(){ return MY_QR.indexOf('data:image') === 0; }
+
+// 长按存图要把二维码画进 canvas，先备好 Image 对象（data URI 不会污染画布）
+var QR_IMG = null, MY_QR_IMG = null;
+if(hasQR() && typeof Image !== 'undefined'){ QR_IMG = new Image(); QR_IMG.src = QR_DATA; }
+if(hasMyQR() && typeof Image !== 'undefined'){ MY_QR_IMG = new Image(); MY_QR_IMG.src = MY_QR; }
+function qrReady(){ return !!(QR_IMG && QR_IMG.complete && QR_IMG.naturalWidth > 0); }
+function myQRReady(){ return !!(MY_QR_IMG && MY_QR_IMG.complete && MY_QR_IMG.naturalWidth > 0); }
+// 等二维码都加载完再画图；等不到就照常画，不卡住用户
+function onQRReady(fn){
+  var pending = [];
+  if(hasQR() && !qrReady() && QR_IMG) pending.push(QR_IMG);
+  if(hasMyQR() && !myQRReady() && MY_QR_IMG) pending.push(MY_QR_IMG);
+  if(!pending.length){ fn(); return; }
+  var done = false;
+  function go(){ if(done) return; done = true; fn(); }
+  pending.forEach(function(img){ img.onload = go; img.onerror = go; });
+  setTimeout(go, 2000);
+}
+
+/* ===================== 转发与复制链接 ===================== */
+// 复制链接（给"转发"按钮在老浏览器里的兜底）
+function copyShareLink(){
+  function ok(){ toast('链接已复制，去粘贴给朋友'); }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = SHARE_URL;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var done = false;
+    try { done = document.execCommand('copy'); } catch(e) { done = false; }
+    document.body.removeChild(ta);
+    if(done) ok(); else toast('复制没成功，长按地址栏手动复制');
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(SHARE_URL).then(ok, fallback);
+  } else fallback();
+}
+
+// 微信内置浏览器不允许网页自己唤起分享面板，只能引导用户去点右上角的「···」
+function showWxGuide(){
+  var g = document.getElementById('wxg');
+  if(!g) return;
+  g.className = 'wxg on';
+  g.onclick = function(){ g.className = 'wxg'; };
+  setTimeout(function(){ if(g.className.indexOf('on') >= 0) g.className = 'wxg'; }, 6000);
+}
+
+/* 右上角「转发」按钮：
+   ① 支持 Web Share API 的手机浏览器 → 直接弹系统分享面板（可发微信、朋友圈）；
+   ② 微信内置浏览器 → 引导去点右上角的「···」；
+   ③ 其它（老浏览器/桌面） → 复制链接兜底。 */
+function doShare(){
+  var url = SHARE_URL || (typeof location !== 'undefined' ? location.href : '');
+  if(/MicroMessenger/i.test(navigator.userAgent || '')){ showWxGuide(); return; }
+  if(navigator.share){
+    try {
+      navigator.share({ title: document.title, text: '不懂酒没关系，来测测你就知道', url: url })
+        .catch(function(){ copyShareLink(); });   // 调不起来/被拒就落到复制，别让用户觉得"按了没反应"
+      return;
+    } catch(e) { /* 有的环境同步抛（安全上下文/手势校验），同样落到复制兜底 */ }
+  }
+  copyShareLink();
+}
+
+/* ===================== 长按存图：只画"红卡那一块" ===================== */
+function wrapText(ctx, text, maxWidth){
+  var lines = [], line = '';
+  for(var i = 0; i < text.length; i++){
+    var ch = text.charAt(i);
+    if(ch === '\n'){ lines.push(line); line = ''; continue; }
+    var test = line + ch;
+    if(ctx.measureText(test).width > maxWidth && line){ lines.push(line); line = ch; }
+    else line = test;
+  }
+  if(line) lines.push(line);
+  return lines;
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function heroPick(){
+  var u = buildProfile();
+  var top3 = pickTop(rank(u), u);
+  return { u: u, w: top3[selected] ? top3[selected].w : top3[0].w };
+}
+function buildHeroCanvas(){
+  var hp = heroPick(), w = hp.w, u = hp.u;
+  var al = almanacFor(u.scene);
+  var l = solarToLunar(TODAY);
+  var md = (l.isLeap ? '闰' : '') + LM[l.month - 1] + '月' + lunarDayName(l.day);
+  var monthEn = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE',
+                 'JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'][TODAY.getMonth()];
+  var lunarStr = '农历 ' + md;
+  var gzStr = ganzhiYear(l.year) + '年 · 属' + SX[((l.year - 4) % 12 + 12) % 12];
+
+  var W = 750, dpr = 2;
+  var serif = '"Songti SC","Noto Serif SC","SimSun",Georgia,serif';
+  var sans  = '"PingFang SC","Microsoft YaHei",sans-serif';
+  var INK = '#2E2018', GRAY = '#8A7D70', PAPER = '#EFEBE4';
+
+  /* 白卡 */
+  var X = 44, WD = 662, CT = 40, PX = 56;
+  var CX2 = X + PX, CW2 = WD - PX * 2, RX = X + WD - PX;
+
+  var cv = document.createElement('canvas');
+  cv.width = W * dpr;
+  cv.height = 2000;
+  var m = cv.getContext('2d');
+
+  /* ---- 量文本 ---- */
+  m.font = '26px ' + sans;
+  var metaL = wrapText(m, metaText(w), CW2);
+  m.font = '24px ' + sans;
+  var tagRows = [], row = [], rowW = 0, GAP = 14;
+  plainTags(w).forEach(function(t){
+    var tw = m.measureText(t).width + 40;
+    if(rowW && rowW + GAP + tw > CW2 - 88){ tagRows.push(row); row = []; rowW = 0; }
+    row.push({ t: t, w: tw }); rowW += (rowW ? GAP : 0) + tw;
+  });
+  if(row.length) tagRows.push(row);
+  m.font = '28px ' + sans;
+  var tasteL = wrapText(m, tasteText(w), CW2 - 88);
+  var whyL = [];
+  whyLines(w, u).forEach(function(x){
+    m.font = '26px ' + sans;
+    var ls = wrapText(m, x, CW2 - 36);
+    ls[0] = '— ' + ls[0];
+    whyL.push(ls);
+  });
+  m.font = '28px ' + serif;
+  var kwL = wrapText(m, w.kw.join('，') + '。', CW2);
+  var yi0 = al.yi[0], jiStr = '忌 ' + al.ji.join(' · ');
+
+  /* ---- 纵向排版（白卡）---- */
+  var DIV1 = 300;                                   // 日期区下的分隔线
+  var HDTXT = 400, JIY = 452;                       // 「宜××」与「忌××」基线
+  var redTop = CT + 500;
+  /* 红卡内部（相对 redTop） */
+  var R_NAME = 158, R_META = 214;
+  var R_PILL = R_META + 38 * (metaL.length - 1) + 18;
+  var R_TAGS = R_PILL + tagRows.length * 60;
+  var R_TLBL = R_TAGS + 66;
+  var R_TASTE = R_TLBL + 44;
+  var R_TEND = R_TASTE + (tasteL.length - 1) * 48 + 34;
+  var redH = R_TEND + 40;
+  var RP = 40, RCW = redW0();
+  function redW0(){ return CW2 - RP * 2; }
+
+  var whyTop = redTop + redH + 48;
+  var whyY = whyTop;
+  whyL.forEach(function(ls){ whyY += 50 + (ls.length - 1) * 44; });
+  var kwTop = whyY + 38;
+  var kwEnd = kwTop + (kwL.length - 1) * 46;
+  var footBase = kwEnd + 66;
+  var cardBot = footBase + 56;
+
+  /* 卡外：品牌 + 二维码 */
+  var bTop = cardBot + 28;
+  var QT = 132;
+  var qy = bTop + 8;
+  var qrBot = qy + QT + 44;
+  var brandBot = bTop + 112;
+  var H = Math.max(qrBot, brandBot) + 52;
+
+  cv.height = H * dpr;
+  var ctx = cv.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  ctx.fillStyle = PAPER;
+  ctx.fillRect(0, 0, W, H);
+
+  function text(t, x, yy, size, font, color, bold){
+    ctx.font = (bold ? '600 ' : '') + size + 'px ' + font;
+    ctx.fillStyle = color;
+    ctx.fillText(t, x, yy);
+  }
+  function center(t, cx, yy, size, font, color, bold){
+    ctx.font = (bold ? '600 ' : '') + size + 'px ' + font;
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.fillText(t, cx, yy);
+    ctx.textAlign = 'left';
+  }
+  function right(t, x, yy, size, font, color){
+    ctx.font = size + 'px ' + font;
+    ctx.fillStyle = color;
+    ctx.textAlign = 'right';
+    ctx.fillText(t, x, yy);
+    ctx.textAlign = 'left';
+  }
+  function spaced(t, x, yy, size, font, color, ls){
+    ctx.font = size + 'px ' + font;
+    ctx.fillStyle = color;
+    for(var i = 0; i < t.length; i++){
+      ctx.fillText(t.charAt(i), x, yy);
+      x += ctx.measureText(t.charAt(i)).width + ls;
+    }
+    return x;
+  }
+  function hline(x, yy, w2, color){
+    ctx.fillStyle = color; ctx.fillRect(x, yy, w2, 1);
+  }
+
+  /* ---- 白卡 ---- */
+  roundRect(ctx, X, CT, WD, cardBot - CT, 10);
+  ctx.fillStyle = '#FFFFFF'; ctx.fill();
+
+  /* 日期区：左大日期，右星期/农历/干支 */
+  spaced(monthEn, CX2, CT + 92, 30, serif, INK, 7);
+  text(String(TODAY.getDate()), CX2 - 6, CT + 252, 150, serif, INK);
+  right(WK[TODAY.getDay()], RX, CT + 118, 26, sans, GRAY);
+  right(lunarStr, RX, CT + 156, 24, sans, GRAY);
+  right(gzStr, RX, CT + 192, 24, sans, GRAY);
+  hline(CX2, CT + DIV1, CW2, '#E7E0D6');
+
+  /* 「宜××」大标题 + 「忌××」小字 */
+  ctx.font = '600 60px ' + serif;
+  var w1 = ctx.measureText('宜').width;
+  ctx.font = '600 60px ' + serif;
+  var w2 = ctx.measureText(yi0).width;
+  var hx = X + (WD - (w1 + w2 + 10)) / 2;
+  text('宜', hx, CT + HDTXT, 60, serif, '#A5384A', true);
+  text(yi0, hx + w1 + 10, CT + HDTXT, 60, serif, INK, true);
+  center(jiStr, X + WD / 2, CT + JIY, 24, sans, GRAY);
+
+  /* 红色酒卡 */
+  roundRect(ctx, CX2, redTop, CW2, redH, 16);
+  var bg = ctx.createLinearGradient(0, redTop, 0, redTop + redH);
+  bg.addColorStop(0, '#7B2430');
+  bg.addColorStop(1, '#43111C');
+  ctx.fillStyle = bg; ctx.fill();
+
+  var rx0 = CX2 + RP, rcw = RCW;
+  var flagT = '今天配你的这一' + (w.soft ? '杯' : '瓶');
+  ctx.font = '22px ' + sans;
+  var fw = ctx.measureText(flagT).width + 40;
+  roundRect(ctx, rx0, redTop + 56, fw, 48, 24);
+  ctx.strokeStyle = 'rgba(233,201,168,.65)'; ctx.lineWidth = 1.5; ctx.stroke();
+  center(flagT, rx0 + fw / 2, redTop + 56 + 31, 22, sans, '#E9C9A8');
+
+  text(w.n, rx0, redTop + R_NAME, 54, serif, '#FFFFFF', true);
+  metaL.forEach(function(t, i){ text(t, rx0, redTop + R_META + i * 38, 26, sans, 'rgba(255,255,255,.75)'); });
+
+  tagRows.forEach(function(r2, ri){
+    var x = rx0;
+    r2.forEach(function(o){
+      roundRect(ctx, x, redTop + R_PILL + ri * 60, o.w, 46, 23);
+      ctx.fillStyle = 'rgba(255,255,255,.14)';
+      ctx.fill();
+      text(o.t, x + 20, redTop + R_PILL + ri * 60 + 30, 24, sans, '#F6E7D8');
+      x += o.w + GAP;
+    });
+  });
+
+  hline(rx0, redTop + R_TAGS + 24, rcw, 'rgba(255,255,255,.18)');
+  text('喝起来是什么感觉', rx0, redTop + R_TLBL, 20, sans, '#E9C9A8');
+  tasteL.forEach(function(t, i){ text(t, rx0, redTop + R_TASTE + i * 48, 28, sans, 'rgba(255,255,255,.94)'); });
+
+  /* 推荐理由（白卡上，仿引文排版） */
+  var yw = whyTop;
+  whyL.forEach(function(ls){
+    ls.forEach(function(t, i){ text(t, CX2 + (i ? 18 : 0), yw + i * 44, 26, sans, '#4A3A30'); });
+    yw += 50 + (ls.length - 1) * 44;
+  });
+
+  /* 一句话味道（衬线引文） */
+  kwL.forEach(function(t, i){ text(t, CX2, kwTop + i * 46, 28, serif, '#6B5B4F'); });
+
+  /* 卡内页脚 */
+  text('《今天喝什么》· 12 个问题帮你挑一杯', CX2, footBase, 20, sans, '#A79A8B');
+
+  /* ---- 卡外：品牌 + slogan + 两枚二维码 ---- */
+  text('今天喝什么', CX2, bTop + 64, 36, serif, INK, true);
+  text('不懂酒没关系，来测测你就知道', CX2, bTop + 108, 24, sans, GRAY);
+
+  var tiles = [];
+  if(qrReady())   tiles.push({ img: QR_IMG,    cap: '扫码来测' });
+  if(myQRReady()) tiles.push({ img: MY_QR_IMG, cap: '扫码关注' });
+  if(tiles.length){
+    var qx = RX - tiles.length * QT - (tiles.length - 1) * 14;
+    tiles.forEach(function(t, i){
+      var x = qx + i * (QT + 14);
+      roundRect(ctx, x, qy, QT, QT, 10);
+      ctx.fillStyle = '#FFFFFF'; ctx.fill();
+      try { ctx.drawImage(t.img, x + 9, qy + 9, QT - 18, QT - 18); } catch(e) {}
+      center(t.cap, x + QT / 2, qy + QT + 34, 18, sans, GRAY);
+    });
+  }
+
+  return cv;
+}
+
+/* ===================== 存图：一条对多终端都尽量成立的路径 =====================
+   难点在于各家对"网页把图存到手机"的支持天差地别：
+     · 微信内置浏览器：既禁止网页下载，也没有带文件的系统分享 → 只剩长按图片
+     · iOS Safari：<a download> 经常毫无反应 → 得走系统分享面板里的「存储图像」
+     · 安卓 Chrome / Edge：<a download> + Blob 最稳
+     · 一部分国产浏览器／老旧 webview：<a download> 被阉割 → 退回长按
+   所以按环境排优先级，每一层失败都要有明确落点，不能让用户对着没反应的按钮发呆。 */
+var POSTER_BLOB = null, POSTER_URL = null;
+
+function posterFileName(){
+  var p = function(n){ return ('0' + n).slice(-2); };
+  return 'today-drink-' + TODAY.getFullYear() + p(TODAY.getMonth() + 1) + p(TODAY.getDate()) + '.png';
+}
+function isIOS(){
+  return /iP(hone|ad|od)/.test(navigator.userAgent || '')
+      || (navigator.platform === 'MacIntel' && (navigator.maxTouchPoints || 0) > 1);
+}
+/* 同步把预览图转成 Blob 并缓存：三个按钮共用一份，别每次重算那八十万个字节。
+   必须是同步的——navigator.share 依赖"此刻还在用户手势里"，中间插一次异步就把手势丢了。 */
+function posterBlob(){
+  if(POSTER_BLOB) return POSTER_BLOB;
+  var im = document.getElementById('pvlimg');
+  if(!im || !im.src || im.src.indexOf('data:image') !== 0) return null;
+  try{
+    var ps = im.src.split(',');
+    var mime = (ps[0].match(/:(.*?);/) || [null, 'image/png'])[1];
+    var bin = atob(ps[1]), arr = new Uint8Array(bin.length);
+    for(var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    POSTER_BLOB = new Blob([arr], { type: mime });
+  }catch(e){ POSTER_BLOB = null; }
+  return POSTER_BLOB;
+}
+function posterFile(){
+  var b = posterBlob();
+  if(!b || typeof File !== 'function') return null;
+  try{ return new File([b], posterFileName(), { type: b.type }); }catch(e){ return null; }
+}
+function downloadPNG(){
+  var blob = posterBlob();
+  if(!blob) return false;
+  try{
+    if(POSTER_URL) URL.revokeObjectURL(POSTER_URL);
+    POSTER_URL = URL.createObjectURL(blob);   // Blob URL 比超长 data URI 在 webview 里成功率高
+  }catch(e){ return false; }
+  var a = document.createElement('a');
+  a.href = POSTER_URL;
+  a.download = posterFileName();
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  // ⚠️ 不能点完立刻 remove：Firefox 是在 click 之后才异步接管下载的，立刻删会把下载掐断
+  setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1500);
+  return true;
+}
+/* 系统分享面板：iOS 的「存储图像」、安卓各家 ROM 的「保存」都藏在这一层里 */
+function sharePosterFile(text){
+  var f = posterFile();
+  if(!f || !navigator.canShare || !navigator.canShare({ files: [f] })) return false;
+  navigator.share({ files: [f], title: '今天喝什么', text: text || '' }).catch(function(e){
+    // 用户主动取消不算失败，别追着再弹一次下载
+    if(!e || e.name !== 'AbortError') guideSave('自动保存没成功，长按这张图存下来吧');
+  });
+  return true;
+}
+/* 兜底：把预览层留在屏幕上教用户长按——这是所有环境都认的最后一条路 */
+function guideSave(msg){
+  var lay = document.getElementById('pvl'), tip = document.getElementById('pvltip');
+  if(lay) lay.className = 'pvl on';
+  if(tip){ tip.textContent = msg; tip.className = 'pvl-tip on'; }
+  toast(msg);
+}
+function clearSaveTip(){
+  var tip = document.getElementById('pvltip');
+  if(tip){ tip.className = 'pvl-tip'; tip.textContent = ''; }
+}
+/* 保存 / 存了再发朋友圈共用这条：先验环境，再按顺序试，最后退到长按 */
+function savePosterLocal(okMsg, guideMsg){
+  clearSaveTip();   // 先把上一次留下的提示清掉，免得这次明明存成功了还挂着旧话
+  if(inWx()){ guideSave(guideMsg.wx); return; }
+  if(!posterBlob()){ toast('图片还没准备好，重开一次预览试试'); return; }
+  var order = isIOS() ? ['share', 'anchor'] : ['anchor', 'share'];
+  for(var i = 0; i < order.length; i++){
+    if(order[i] === 'share' && sharePosterFile('')) return;
+    if(order[i] === 'anchor' && downloadPNG()){ toast(okMsg); return; }
+  }
+  guideSave(guideMsg.def);
+}
+function inWx(){ return /MicroMessenger/i.test(navigator.userAgent || ''); }
+
+/* 预览层下面那排三个按钮：微信 / 朋友圈 / 保存。 */
+function sharePosterToWx(){
+  clearSaveTip();
+  if(inWx()){ toast('长按图片保存到相册，再发给朋友'); return; }
+  if(!posterBlob()){ toast('图片还没准备好，重开一次预览试试'); return; }
+  if(sharePosterFile('不懂酒没关系，来测测你就知道')) return;
+  if(downloadPNG()){ toast('已存到手机，去微信里把这张图发出去'); return; }
+  guideSave('没能直接发给微信，长按这张图先存下来');
+}
+function posterToMoments(){
+  savePosterLocal('存好了；发朋友圈时从相册选这张图',
+    { wx: '长按图片保存到相册，朋友圈里从相册选图发布',
+      def: '长按这张图保存到相册，朋友圈里从相册选它发布' });
+}
+function savePoster(){
+  savePosterLocal('已开始保存；没弹保存框的话，长按这张图也能存',
+    { wx: '微信里网页不能直接下载：长按这张图 → 保存图片',
+      def: '长按这张图 → 保存图片' });
+}
+
+/* 长按红卡＝把"黄历+红卡"长图画出来，弹全屏预览层。
+   预览图上不做任何手势拦截：长按它走系统"保存图片"菜单；
+   保存/转发也可以点下面那排按钮。 */
+function paintHeroImage(){
+  onQRReady(function(){
+    var url = buildHeroCanvas().toDataURL('image/png');
+    var lay = document.getElementById('pvl'), im = document.getElementById('pvlimg');
+    if(!lay || !im) return;
+    // 换了新海报，之前缓存的 Blob 就作废了；旧 URL 延后回收，免得掐掉还在进行中的下载
+    POSTER_BLOB = null;
+    if(POSTER_URL){ var oldu = POSTER_URL; POSTER_URL = null;
+                    setTimeout(function(){ try{ URL.revokeObjectURL(oldu); }catch(e){} }, 5000); }
+    im.src = url;
+    clearSaveTip();
+    lay.className = 'pvl on';
+    lay.onclick = function(){ lay.className = 'pvl'; clearSaveTip(); };   // 轻点任意处关闭（长按不会触发 click）
+    var b1 = document.getElementById('pvlwx'),
+        b2 = document.getElementById('pvlpyq'),
+        b3 = document.getElementById('pvlsave');
+    /* 二次确认：每个动作都先给「确认 / 取消」的选择权，确认了才执行 */
+    var cfm   = document.getElementById('pvlcfm'),
+        cfmT  = document.getElementById('pvlcfmt'),
+        cfmOk = document.getElementById('pvlcok'),
+        cfmNo = document.getElementById('pvlcno'),
+        todo  = null;
+    function ask(msg, fn){
+      if(!cfm || !cfmOk){ fn(); return; }   // 结构缺失时退化为直接执行
+      cfmT.textContent = msg;
+      todo = fn;
+      cfm.className = 'pvl-cfm on';
+    }
+    function closeCfm(){ if(cfm) cfm.className = 'pvl-cfm'; todo = null; }
+    if(cfm){
+      cfm.onclick = function(e){ e.stopPropagation(); closeCfm(); };          // 点空白处＝取消
+      var cfmI = cfm.querySelector('.pvl-cfm-i');
+      if(cfmI) cfmI.onclick = function(e){ e.stopPropagation(); };            // 点小卡本体不关
+    }
+    if(cfmOk) cfmOk.onclick = function(e){
+      e.stopPropagation();
+      closeCfm();
+      if(todo){ var fn = todo; todo = null; fn(); }   // 同步执行，保住用户手势（navigator.share 需要）
+    };
+    if(cfmNo) cfmNo.onclick = function(e){ e.stopPropagation(); closeCfm(); };
+    var pcx = document.getElementById('pvlcancel');
+    if(pcx) pcx.onclick = function(e){ e.stopPropagation(); lay.className = 'pvl'; clearSaveTip(); };
+    if(b1) b1.onclick = function(e){ e.stopPropagation(); ask('把结果图分享给微信朋友？确认后会弹出系统分享面板，在里面选「微信」再选好友。', sharePosterToWx); };
+    if(b2) b2.onclick = function(e){ e.stopPropagation(); ask('朋友圈只能由你手动发：确认后先把图存到手机，再打开微信 → 朋友圈 → 右上角相机 → 从相册选这张图。', posterToMoments); };
+    if(b3) b3.onclick = function(e){ e.stopPropagation(); ask('把结果图存到手机？安卓一般进「下载」目录；iPhone 会先弹系统面板让你选「存储图像」；微信里请长按这张图保存。', savePoster); };
+  });
+}
+function longPressSave(){ paintHeroImage(); }
+
+/* 回到底下那一页（"三个推荐"）。点结果卡片、点生成的图片，走的都是这里 */
+function closeResult(){
+  if(blocked()) return;
+  step = STEP_PICK;
+  render();
+}
+
+// 一句轻提示：长按存图有没有成功，得给个回音
+function toast(msg){
+  if(typeof document === 'undefined' || !document.body) return;
+  var t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.classList.add('out'); }, 2200);
+  setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 2700);
+}
+
+
+function blocked(){ return Date.now() < lockUntil; }
+
+function bind(){
+  var s = document.getElementById('start');
+  if(s) s.onclick = function(){ if(blocked()) return; step = 1; answers = []; selected = 0; render(); };
+
+  Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(el){
+    el.onclick = function(){
+      if(el.dataset.done || blocked()) return;
+      var qi = step - 1;
+      var q = QUESTIONS[qi];
+
+      // 多选题：点一下就是切换选中，不立刻翻页
+      if(q && q.multi){
+        var idx = parseInt(el.dataset.i, 10);
+        var arr = Array.isArray(answers[qi]) ? answers[qi].slice() : [];
+        var pos = arr.indexOf(idx);
+        if(pos >= 0) arr.splice(pos, 1);                      // 再点一次＝取消
+        else if(isAnyOpt(qi, idx)) arr = [idx];               // 点「都行」＝只要它，清掉其它
+        else {
+          arr = arr.filter(function(k){ return !isAnyOpt(qi, k); }); // 选了具体项就取消「都行」
+          arr.push(idx);
+        }
+        answers[qi] = arr;
+        // 只改选中态和按钮字，不整页重绘——重绘会刷新防误触锁，连点会卡
+        Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(x){
+          var k = parseInt(x.dataset.i, 10);
+          if(arr.indexOf(k) >= 0) x.classList.add('sel'); else x.classList.remove('sel');
+        });
+        var mn0 = document.getElementById('mnext');
+        if(mn0) mn0.textContent = multiLabel(arr.length);
+        return;
+      }
+
+      // 单选题：选中后短暂停顿再翻页
+      el.dataset.done = '1';
+      answers[qi] = parseInt(el.dataset.i, 10);
+      el.classList.add('sel');
+      Array.prototype.forEach.call(view.querySelectorAll('.opt'), function(x){ x.style.pointerEvents = 'none'; });
+      setTimeout(function(){
+        step = (step === NQ) ? STEP_PICK : step + 1;
+        render();
+      }, 260);
+    };
+  });
+
+  // 多选题的确认键
+  var mn = document.getElementById('mnext');
+  if(mn) mn.onclick = function(){
+    if(blocked()) return;
+    var qi = step - 1;
+    if(!Array.isArray(answers[qi])) answers[qi] = [];
+    step = (step === NQ) ? STEP_PICK : step + 1;
+    render();
+  };
+
+  // 三个候选卡：整张卡片可点，点中哪张就定哪瓶
+  Array.prototype.forEach.call(view.querySelectorAll('.card[data-pick]'), function(el){
+    el.onclick = function(){
+      if(el.dataset.done || blocked()) return;
+      el.dataset.done = '1';
+      selected = parseInt(el.dataset.pick, 10);
+      step = STEP_RESULT;
+      render();
+    };
+  });
+
+  // ---- 结果浮层：轻点红卡＝回到三个推荐；点背景也返回；右下角两枚二维码不参与 ----
+  if(ovlBox && ovlBox.className.indexOf('on') >= 0){
+    var bg = ovlBox.querySelector('.ovl-bg');
+    if(bg) bg.onclick = function(){ closeResult(); };
+
+    var hero = ovlBox.querySelector('.hero');
+    if(hero){
+      // 落在二维码上的手势要让给系统（长按识别 / 保存图片），不能当成"轻点返回"
+      function onQRNode(el){
+        while(el && el !== hero){
+          if(el.dataset && el.dataset.noclose) return true;
+          el = el.parentNode;
+        }
+        return false;
+      }
+      var hQR = false, hmoved = false, ht0 = 0, hstart = null;
+      hero.addEventListener('touchstart', function(e){
+        hQR = onQRNode(e.target); hmoved = false; ht0 = Date.now();
+        hstart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }, {passive:true});
+      // 手指按住不动也常有 1-2px 的抖动会触发 touchmove；位移超过 12px 才算滑动，
+      // 否则长按永远被当成滑动取消——这就是"长按没反应"的主因
+      hero.addEventListener('touchmove', function(e){
+        if(!hstart) return;
+        var dx = e.touches[0].clientX - hstart.x, dy = e.touches[0].clientY - hstart.y;
+        if(dx * dx + dy * dy > 144) hmoved = true;
+      }, {passive:true});
+      hero.addEventListener('touchend', function(e){
+        if(hQR || hmoved) return;            // 二维码：把手势让给系统（长按识别/保存）
+        e.preventDefault();                  // 压掉 touchend 之后那次 ghost click
+        if(ht0 && (Date.now() - ht0) > 300){ longPressSave(); return; }  // 长按＝存红卡那块图
+        closeResult();                       // 轻点＝返回
+      });
+      hero.addEventListener('contextmenu', function(e){ if(!hQR) e.preventDefault(); });
+      hero.onclick = function(e){            // 桌面端：点一下也返回
+        if(hQR || hmoved || onQRNode(e.target)) return;
+        e.preventDefault();
+        closeResult();
+      };
+    }
+  }
+
+  var b = document.getElementById('back');
+  if(b) b.onclick = function(){
+    if(blocked()) return;
+    if(step > 1){ step--; answers.length = Math.min(answers.length, step); render(); }
+  };
+
+  // 右上角「转发」按钮：全程常驻，随时能把链接发到群里或朋友圈
+  var fb = document.getElementById('fab');
+  if(fb) fb.onclick = function(){ if(blocked()) return; doShare(); };
+
+  var a = document.getElementById('again');
+  if(a) a.onclick = function(){ if(blocked()) return; step = 0; answers = []; selected = 0; render(); };
+}
+
+/* 手机"点击穿透"防护：touchstart 和随后那次 click 的落点如果不是同一处，
+   说明中间页面重绘过，这次 click 直接吞掉，避免误触到新页面的按钮。
+   （typeof 判断是为了让这段代码在无 DOM 的校验环境里也能被安全加载） */
+if(typeof document !== 'undefined' && document.addEventListener){
+  (function(){
+    var touchTarget = null;
+    document.addEventListener('touchstart', function(e){ touchTarget = e.target; }, true);
+    document.addEventListener('click', function(e){
+      if(touchTarget && !touchTarget.contains(e.target) && !e.target.contains(touchTarget)){
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      touchTarget = null;
+    }, true);
+  })();
+}
+
+render();
+</script>
+</body>
+</html>

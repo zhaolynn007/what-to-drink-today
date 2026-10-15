@@ -1,0 +1,4 @@
+# 统一按 LF 入库，避免 Windows 上 core.autocrlf 把 index.html 改成 CRLF
+* text=auto eol=lf
+*.png binary
+cover.png binary
